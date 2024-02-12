@@ -126,6 +126,16 @@ const Detail = () => {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
+  const timestamp = movie?.release_date.seconds; // This would be the timestamp you want to format
+
+  const time = new Date(timestamp * 1000);
+  const month = time.getMonth() + 1;
+  const year = time.getFullYear();
+  const date = time.getDate();
+  const currentDate = month + "/" + date + "/" + year;
+
+  console.log(currentDate);
+
   return (
     <div className="w-full h-full text-white  ">
       <div className="w-full h-full">
@@ -151,7 +161,7 @@ const Detail = () => {
 
                 <div className="flex space-x-2">
                   <MdDateRange className="mt-0.5 text-[#F20000]/90" />
-                  <p>{movie?.release_date}</p>
+                  <p>{currentDate}</p>
                 </div>
                 <div className="flex space-x-2">
                   <IoTime className="mt-0.5 text-[#F20000]/90" />

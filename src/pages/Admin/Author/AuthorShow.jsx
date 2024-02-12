@@ -71,44 +71,56 @@ const AuthorShow = () => {
                     <th>Acion</th>
                   </tr>
                 </thead>
-                {data?.map((item) => (
-                  <tbody key={item.id}>
-                    <tr className="h-[100px] border">
-                      <td className=" h-[100px] text-center flex items-center justify-center ">
-                        <img
-                          src={item?.img_cast}
-                          width="60px"
-                          className="border-2"
-                        />
-                      </td>
-                      <td className=" text-center overflow-auto scrollbar-hide">
-                        {item?.name_cast}
-                      </td>
-                      <td className=" text-center overflow-auto scrollbar-hide">
-                        {item?.gender}
-                      </td>
-                      <td className=" text-center overflow-auto scrollbar-hide">
-                        {item?.birthday}
-                      </td>
-                      <td className=" text-center space-x-3">
-                        <Link
-                          to={`/admin/update/author/${item.id}`}
-                          state={{ from: item }}
-                        >
-                          <button className="text-2xl">
-                            <FaEye />
+                {data?.map((item) => {
+                  const timestamp = item?.birthday.seconds; // This would be the timestamp you want to format
+
+                  const time = new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }).format(timestamp * 1000);
+
+                  return (
+                    <tbody key={item.id}>
+                      <tr className="h-[100px] border">
+                        <td className=" h-[100px] text-center flex items-center justify-center ">
+                          <img
+                            src={item?.img_cast}
+                            width="60px"
+                            className="border-2"
+                          />
+                        </td>
+                        <td className=" text-center overflow-auto scrollbar-hide">
+                          {item?.name_cast}
+                        </td>
+                        <td className=" text-center overflow-auto scrollbar-hide">
+                          {item?.gender}
+                        </td>
+                        <td className=" text-center overflow-auto scrollbar-hide">
+                          {time}
+                        </td>
+                        <td className=" text-center space-x-3">
+                          <Link
+                            to={`/admin/update/author/${item.id}`}
+                            state={{ from: item }}
+                          >
+                            <button className="text-2xl">
+                              <FaEye />
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() =>
+                              handleDelete(item.id, item?.name_cast)
+                            }
+                            className="text-2xl"
+                          >
+                            <MdDeleteForever />
                           </button>
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(item.id, item?.name_cast)}
-                          className="text-2xl"
-                        >
-                          <MdDeleteForever />
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
               </table>
             </div>
           </div>

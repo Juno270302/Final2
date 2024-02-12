@@ -13,6 +13,8 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddProduct = () => {
   const [file1, setFile1] = useState("");
@@ -28,7 +30,7 @@ const AddProduct = () => {
   const [hours, setHours] = useState("");
   const [language, setLanguage] = useState("");
   const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState();
   const [discription, setDiscription] = useState("");
   const [limitAge, setLimitAge] = useState();
   const [vipMember, setVipMember] = useState();
@@ -238,11 +240,10 @@ const AddProduct = () => {
                     </div>
                     <div className="flex flex-col w-[40%] ">
                       <label className="text-gray-400">Year of Release</label>
-                      <input
-                        onChange={(e) => setDate(e.target.value)}
-                        className="py-3 px-5 border bg-[#2E2439] border-gray-300 rounded text-white"
-                        type="text"
-                        placeholder="2022"
+                      <DatePicker
+                        className="py-3 px-5 border bg-[#2E2439] border-gray-300 rounded text-white w-full"
+                        selected={date}
+                        onChange={(date) => setDate(date)}
                       />
                     </div>
                   </div>

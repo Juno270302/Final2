@@ -5,6 +5,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddAuthor = () => {
   const [file, setFile] = useState("");
@@ -12,7 +15,7 @@ const AddAuthor = () => {
 
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
-  const [birthday, setBirthday] = useState("");
+  const [birthday, setBirthday] = useState();
   const [pob, setPob] = useState("");
   const [role, setRole] = useState("");
   const [discription, setDiscription] = useState("");
@@ -139,11 +142,11 @@ const AddAuthor = () => {
                   <div className="flex justify-between py-3">
                     <div className="flex flex-col w-[40%] ">
                       <label className="text-gray-400">Birthday</label>
-                      <input
-                        onChange={(e) => setBirthday(e.target.value)}
-                        className="py-3 bg-[#2E2439] px-5 border border-gray-300 rounded text-white"
-                        type="text"
-                        placeholder="1973-07-25"
+
+                      <DatePicker
+                        className="py-3 px-5 border bg-[#2E2439] border-gray-300 rounded text-white w-full"
+                        selected={birthday}
+                        onChange={(date) => setBirthday(date)}
                       />
                     </div>
                     <div className="flex flex-col w-[40%] ">

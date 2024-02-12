@@ -17,6 +17,14 @@ const AuthorDetail = () => {
     });
   }, []);
 
+  const timestamp = movie?.birthday.seconds; // This would be the timestamp you want to format
+
+  const time = new Date(timestamp * 1000);
+  const month = time.getMonth() + 1;
+  const year = time.getFullYear();
+  const date = time.getDate();
+  const currentDate = month + "/" + date + "/" + year;
+
   return (
     <div className="bg-[#212140] h-[1000px] w-full ">
       <div className="w-[90%] px-40 pt-24 mx-20 ">
@@ -45,7 +53,7 @@ const AuthorDetail = () => {
               </div>
               <div>
                 <p className="font-main">Birthday</p>
-                <p className="text-gray-400">{movie?.birthday}</p>
+                <p className="text-gray-400">{currentDate}</p>
               </div>
               <div>
                 <p className="font-main">Place of Birth</p>

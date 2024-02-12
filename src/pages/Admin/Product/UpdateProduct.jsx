@@ -13,6 +13,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import ShowCast from "../../../components/ShowCast";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const UpdateProduct = () => {
   const use = useLocation();
@@ -22,11 +25,12 @@ const UpdateProduct = () => {
   const [title, setTitle] = useState();
   const [hours, setHours] = useState();
   const [language, setLanguage] = useState();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(
+    new Date(movie?.release_date.seconds * 1000)
+  );
   const [discription, setDiscription] = useState();
-  const [category, setCategory] = useState();
   const [limitAge, setLimitAge] = useState();
-  const [vipMember, setVipMember] = useState("");
+  const [vipMember, setVipMember] = useState();
   const navigate = useNavigate();
 
   const [file1, setFile1] = useState();
@@ -267,11 +271,10 @@ const UpdateProduct = () => {
                     </div>
                     <div className="flex flex-col w-[40%] ">
                       <label className="text-gray-400">Year of Release</label>
-                      <input
-                        onChange={(e) => setDate(e.target.value)}
-                        className="py-3 px-5 border bg-[#2E2439] border-gray-300 rounded text-white"
-                        type="text"
-                        placeholder={movie.release_date}
+                      <DatePicker
+                        className="py-3 px-5 border bg-[#2E2439] border-gray-300 rounded text-white w-full"
+                        selected={date}
+                        onChange={(date) => setDate(date)}
                       />
                     </div>
                   </div>

@@ -14,6 +14,7 @@ const ChooseAuthor = ({ item, movie }) => {
   const [data, setData] = useState("");
   const [search, setSearch] = useState("");
   const [role, setRole] = useState("");
+  console.log(role);
 
   console.log(data);
 
@@ -120,7 +121,12 @@ const ChooseAuthor = ({ item, movie }) => {
   return (
     <div className="w-full h-full bg-[#212140]">
       <div className="w-full px-20 py-20 flex flex-row">
-        <NavbarAuthor movie={movie} data={data} role={role} authorID ={data.id} />
+        <NavbarAuthor
+          movie={movie}
+          data={data}
+          role={role}
+          authorID={data.id}
+        />
         <div className="max-w-[950px] h-full w-full mx-auto bg-[#553E58] rounded-3xl text-white ">
           <div className="w-full h-full p-7 ">
             <div className="flex w-full  items-center justify-between  ">

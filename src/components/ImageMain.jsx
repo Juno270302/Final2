@@ -10,6 +10,7 @@ import { db } from "../firebase";
 const ImageMain = () => {
   const [movies, setMovies] = useState([]);
   const movie = movies[Math.floor(Math.random() * movies.length)];
+  console.log(movie);
 
   //get movies -> database
   useEffect(() => {
@@ -30,6 +31,15 @@ const ImageMain = () => {
       return str;
     }
   };
+
+  const timestamp = movie?.release_date.seconds; // This would be the timestamp you want to format
+
+  const time = new Date(timestamp * 1000);
+  const month = time.getMonth() + 1;
+  const year = time.getFullYear();
+  const date = time.getDate();
+  const currentDate = month + "/" + date + "/" + year;
+
   return (
     <div className="w-full h-[550px] ">
       <img
@@ -44,7 +54,7 @@ const ImageMain = () => {
             <p>7.5</p>
           </p>
           <BsDot className="mt-1" />
-          <p>{movie?.release_date}</p>
+          <p>{currentDate}</p>
           <BsDot className="mt-1" />
           <p>{movie?.language}</p>
         </div>
