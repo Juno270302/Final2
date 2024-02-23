@@ -22,8 +22,6 @@ const Review = ({ movie }) => {
     });
   }, [user?.uid]);
 
-
-
   //update Message firm
   const submitHandle = async (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ const Review = ({ movie }) => {
 
     await updateDoc(doc(db, "movies", `${movie?.id}`), {
       chat: arrayUnion({
-        evaluate: evaluate,
+        evaluate: Number(evaluate),
         message: message,
         name_user: users?.username,
         img_user: users?.img,
@@ -66,12 +64,12 @@ const Review = ({ movie }) => {
                   className="text-white px-5 w-full h-[50px] bg-[#080A1A] rounded-md border border-gray-300"
                 >
                   <option value=""></option>
-                  <option value="0">0 - Poor</option>
-                  <option value="1">1 - Fair</option>
-                  <option value="2">2 - Good</option>
-                  <option value="3">3 - Very Good</option>
-                  <option value="4">4 - Excellent</option>
-                  <option value="5">5 - Masterpiece</option>
+                  <option value={0}>0 - Poor</option>
+                  <option value={1}>1 - Fair</option>
+                  <option value={2}>2 - Good</option>
+                  <option value={3}>3 - Very Good</option>
+                  <option value={4}>4 - Excellent</option>
+                  <option value={5}>5 - Masterpiece</option>
                 </select>
               </div>
               <div className="space-y-3">
@@ -99,7 +97,7 @@ const Review = ({ movie }) => {
                   ?.reverse()
                   .map((item, index) => {
                     let a;
-                    if (item.evaluate === "5") {
+                    if (item.evaluate === 5) {
                       a = (
                         <div className="flex flex-row">
                           <FaStar />
@@ -110,7 +108,7 @@ const Review = ({ movie }) => {
                         </div>
                       );
                     }
-                    if (item.evaluate === "4") {
+                    if (item.evaluate === 4) {
                       a = (
                         <div className="flex flex-row">
                           <FaStar />
@@ -121,7 +119,7 @@ const Review = ({ movie }) => {
                         </div>
                       );
                     }
-                    if (item.evaluate === "3") {
+                    if (item.evaluate === 3) {
                       a = (
                         <div className="flex flex-row">
                           <FaStar />
@@ -132,7 +130,7 @@ const Review = ({ movie }) => {
                         </div>
                       );
                     }
-                    if (item.evaluate === "2") {
+                    if (item.evaluate === 2) {
                       a = (
                         <div className="flex flex-row">
                           <FaStar />
@@ -143,7 +141,7 @@ const Review = ({ movie }) => {
                         </div>
                       );
                     }
-                    if (item.evaluate === "1") {
+                    if (item.evaluate === 1) {
                       a = (
                         <div className="flex flex-row">
                           <FaStar />

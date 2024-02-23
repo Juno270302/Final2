@@ -37,7 +37,7 @@ const MoviesSeries = () => {
 
   //Tinh tổng có bao nhiêu bộ phim
   useEffect(() => {
-    setCount(movies.length);
+    setCount(movies.filter((e) => e.license?.includes("None")).length);
   }, [movies]);
 
   //setValue
@@ -79,9 +79,7 @@ const MoviesSeries = () => {
 
         <div className="ml-20 w-full">
           {movies
-            .filter((e) =>
-              e.license?.includes("None")
-            )
+            .filter((e) => e.license?.includes("None"))
             .filter((e) =>
               e.title.toLowerCase().includes(search.toLowerCase(search))
             )
@@ -92,9 +90,10 @@ const MoviesSeries = () => {
                 return e.genre.includes(value);
               }
             })
-            .map((item, index) => (
-              <ShowMovie item={item} index={index} />
-            ))}
+            .map((item, index) => {
+
+              return <ShowMovie item={item} index={index} />;
+            })}
         </div>
       </div>
     </div>

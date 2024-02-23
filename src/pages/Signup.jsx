@@ -26,11 +26,7 @@ const Signup = () => {
     try {
       const check = await signUp(email, password, name);
       handleSuccess();
-      const interval = setInterval(() => {
-        navigate('/')
-      }, 2000);
-
-      return () => clearInterval(interval);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }

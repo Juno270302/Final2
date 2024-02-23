@@ -48,7 +48,7 @@ const Detail = () => {
 
   //set favorite
   useEffect(() => {
-    const a = users?.filter((e) => e.id === movie?.id);
+    const a = users?.filter((e) => e?.id === movie?.id);
     setLike(a[0]?.like);
   }, [users]);
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
-const ShowMovie = ({ item, index}) => {
+const ShowMovie = ({ item, index }) => {
+ 
   return (
-    <div key={index} className="w-[340px] inline-block cursor-pointer relative p-2  ">
+    <div
+      key={index}
+      className="w-[340px] inline-block cursor-pointer relative p-2  "
+    >
       <Link to={`/detail/${item.id}`} state={{ from: item }}>
         <img
           className="w-full h-auto"

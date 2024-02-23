@@ -10,7 +10,6 @@ import { db } from "../firebase";
 const ImageMain = () => {
   const [movies, setMovies] = useState([]);
   const movie = movies[Math.floor(Math.random() * movies.length)];
-  console.log(movie);
 
   //get movies -> database
   useEffect(() => {
@@ -32,6 +31,16 @@ const ImageMain = () => {
     }
   };
 
+  const data = [
+    { title: "One", prix: 100 },
+    { title: "Two", prix: 200 },
+    { title: "Three", prix: 300 },
+  ];
+
+  let c = movie?.chat?.reduce((a, v) => (a = a + v.evaluate), 0);
+  console.log(c);
+  let d = c / movie?.chat?.length;
+
   const timestamp = movie?.release_date.seconds; // This would be the timestamp you want to format
 
   const time = new Date(timestamp * 1000);
@@ -51,7 +60,7 @@ const ImageMain = () => {
         <div className="flex font-main space-x-3 text-xl">
           <p className="flex space-x-2">
             <FaStar className="mt-0.5 text-red-400" />
-            <p>7.5</p>
+            <div>{d}</div>
           </p>
           <BsDot className="mt-1" />
           <p>{currentDate}</p>
@@ -61,14 +70,25 @@ const ImageMain = () => {
         <h1 className="text-3xl font-main ">{movie?.title}</h1>
         <p className="w-[50%]">{truncateString(movie?.overview, 150)}</p>
         <div className="space-x-7 font-main ml-4 flex">
-          <Link to={`/detail/${movie?.id}`} state={{ from: movie }}>
-            <button className="rounded-3xl bg-[#ff99be]/90 py-2 px-5 flex space-x-1 text-white ">
-              <p>
-                <CiPlay1 className="mt-1" />
-              </p>
-              <p>Watch</p>
-            </button>
-          </Link>
+          {movie?.license === "VIP" ? (
+            <Link to={`/crmovie`}>
+              <button className="rounded-3xl bg-[#ff99be]/90 py-2 px-5 flex space-x-1 text-white ">
+                <p>
+                  <CiPlay1 className="mt-1" />
+                </p>
+                <p>Watch</p>
+              </button>
+            </Link>
+          ) : (
+            <Link to={`/detail/${movie?.id}`} state={{ from: movie }}>
+              <button className="rounded-3xl bg-[#ff99be]/90 py-2 px-5 flex space-x-1 text-white ">
+                <p>
+                  <CiPlay1 className="mt-1" />
+                </p>
+                <p>Watch</p>
+              </button>
+            </Link>
+          )}
 
           <button className=" text-white bg-slate-500/90 rounded-3xl py-2 px-5 ml-5 flex space-x-2">
             <p>

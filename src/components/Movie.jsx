@@ -30,7 +30,7 @@ const Movie = () => {
 
   return (
     <div className="text-black">
-      <h2 className="font-bold p-4 text-2xl text-white">Popular Movies</h2>
+      <h2 className="font-bold p-4 text-2xl text-white">Phim Phổ Biến</h2>
       <div className="relative flex items-center group">
         <MdChevronLeft
           onClick={slideLeft}
@@ -41,9 +41,11 @@ const Movie = () => {
           id={"slider"}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
         >
-          {movies.map((item) => (
-            <ShowMovie item={item} key={item.id} />
-          ))}
+          {movies
+            .filter((e) => e.license?.includes("None"))
+            .map((item) => (
+              <ShowMovie item={item} key={item.id} />
+            ))}
         </div>
         <MdChevronRight
           onClick={slideRight}

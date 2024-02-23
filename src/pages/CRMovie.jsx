@@ -56,7 +56,7 @@ const CRMovie = () => {
 
   //Tinh tổng có bao nhiêu bộ phim
   useEffect(() => {
-    setCount(movies.length);
+    setCount(movies.filter((e) => e.license?.includes("VIP")).length);
   }, [movies]);
 
   //setValue
@@ -81,7 +81,7 @@ const CRMovie = () => {
   });
 
   return (
-    <div className="h-full">
+    <div className="h-full w-full">
       {data?.member === "VIP" ? (
         <div className="bg-[#212140] h-screen w-full ">
           <div className="absolute w-[90%] top-36 px-40 mx-16 ">
@@ -133,17 +133,14 @@ const CRMovie = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-black/60 px-96 py-32 w-full h-screen text-white">
-          <div className=" w-full h-full px-52  ">
+        <div className="bg-black/60 px-96 py-32 2xl:px-44 xl:px-24 w-full h-screen text-white ">
+          <div className=" w-full h-full px-52 ">
             <div className=" w-full p-5 h-full bg-[#212140]">
               <div className="border-2 w-full h-full ">
                 <div className=" px-32 py-12 space-y-11 flex flex-col items-center justify-center">
-                  <h1 className=" font-main text-2xl">
-                    Buy VIP to watch exclusive movies{" "}
-                  </h1>
-                  <div className=" w-full h-[450px] px-10">
+                  <div className=" w-full h-[450px] max-w-96 px-10 mt-8">
                     <div className="w-full h-full border bg-[#E0D5D5] rounded-xl space-y-9">
-                      <div className="text-[#f20000] text-center text-2xl font-main mt-10">
+                      <div className="text-[#f20000] text-center text-2xl font-main mt-10 ">
                         Phim độc quyền
                       </div>
                       <div className="text-black space-y-5 ml-6">

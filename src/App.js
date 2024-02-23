@@ -30,6 +30,7 @@ import CheckOut from "./pages/CheckOut";
 import ViewMoreAuthor from "./pages/ViewMoreAuthor";
 import CRMovie from "./pages/CRMovie";
 import Category from "./pages/Category";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -83,16 +84,94 @@ function App() {
                 </RoleAdmin>
               }
             />
-            <Route path="add" element={<AddProduct />} />
-            <Route path="authorshow" element={<AuthorShow />} />
-            <Route path="usershow" element={<UserShow />} />
-            <Route path="genreshow" element={<GenreShow />} />
-            <Route path="addauthor" element={<AddAuthor />} />
-            <Route path="addgenre" element={<AddGenre />} />
-            <Route path="update/product/:id" element={<UpdateProduct />} />
-            <Route path="update/author/:id" element={<UpdateAuthor />} />
-            <Route path="add/author/:id" element={<AddAuthorToProduct />} />
-            <Route path="add/genre/:id" element={<AddGenreToProduct />} />
+            <Route
+              path="add"
+              element={
+                <RoleAdmin>
+                  <AddProduct />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="dashboard"
+              element={
+                <RoleAdmin>
+                  <Dashboard />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="authorshow"
+              element={
+                <RoleAdmin>
+                  <AuthorShow />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="usershow"
+              element={
+                <RoleAdmin>
+                  <UserShow />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="genreshow"
+              element={
+                <RoleAdmin>
+                  <GenreShow />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="addauthor"
+              element={
+                <RoleAdmin>
+                  <AddAuthor />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="addgenre"
+              element={
+                <RoleAdmin>
+                  <AddGenre />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="update/product/:id"
+              element={
+                <RoleAdmin>
+                  <UpdateProduct />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="update/author/:id"
+              element={
+                <RoleAdmin>
+                  <UpdateAuthor />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="add/author/:id"
+              element={
+                <RoleAdmin>
+                  <AddAuthorToProduct />
+                </RoleAdmin>
+              }
+            />
+            <Route
+              path="add/genre/:id"
+              element={
+                <RoleAdmin>
+                  <AddGenreToProduct />
+                </RoleAdmin>
+              }
+            />
           </Route>
           <Route
             path="movies"
@@ -103,7 +182,14 @@ function App() {
             }
           />
           <Route path="authors">
-            <Route index element={<Authors />} />
+            <Route
+              index
+              element={
+                <RoleUser>
+                  <Authors />
+                </RoleUser>
+              }
+            />
             <Route path="detail/:id" element={<AuthorDetail />} />
           </Route>
 
@@ -123,10 +209,38 @@ function App() {
               </RoleUser>
             }
           />
-          <Route path="checkout/:id" element={<CheckOut />} />
-          <Route path="crmovie" element={<CRMovie />} />
-          <Route path="Viewmoreauthor/:id" element={<ViewMoreAuthor />} />
-          <Route path="category/:id" element={<Category />} />
+          <Route
+            path="checkout/:id"
+            element={
+              <RoleUser>
+                <CheckOut />
+              </RoleUser>
+            }
+          />
+          <Route
+            path="crmovie"
+            element={
+              <RoleUser>
+                <CRMovie />
+              </RoleUser>
+            }
+          />
+          <Route
+            path="Viewmoreauthor/:id"
+            element={
+              <RoleUser>
+                <ViewMoreAuthor />
+              </RoleUser>
+            }
+          />
+          <Route
+            path="category/:id"
+            element={
+              <RoleUser>
+                <Category />
+              </RoleUser>
+            }
+          />
         </Route>
       </Routes>
     </AuthContextProvider>

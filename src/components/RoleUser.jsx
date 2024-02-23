@@ -35,14 +35,14 @@ const RoleUser = ({ children }) => {
     return children;
   } else {
     return (
-      <div className="w-full h-screen border">
+      <div className="w-full h-screen ">
         <div className="w-full px-4 py-40">
-          <div className="max-w-[950px] h-[50px] mx-auto bg-[#352036]/40 rounded-3xl text-white my-2 flex items-center justify-center space-x-2">
-            <p className="text-center">Vui lòng bấm vào đây để đăng nhập</p>
-            <Link to="/login" className="text-red-700 font-bold text-xl">
-              Login
-            </Link>
-          </div>
+          <Link to="/login">
+            <div className="max-w-[950px] h-[50px] mx-auto bg-[#352036]/40 rounded-3xl text-white my-2 flex items-center justify-center space-x-2 border">
+              <p className="text-center">Vui lòng bấm vào đây để đăng nhập</p>
+              <span className="text-red-700 font-bold text-xl">Login</span>
+            </div>
+          </Link>
         </div>
       </div>
     );

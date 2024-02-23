@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
-
 const SaveShow = () => {
   const { user } = UserAuth();
   const [movie, setMovie] = useState([]);
@@ -33,7 +32,7 @@ const SaveShow = () => {
   return (
     <div className="w-full h-screen bg-[#212140]">
       <div className="w-full h-[920px] px-10 py-40 flex flex-row">
-        <NavbarAccount bg={"bgFavorite"}/>
+        <NavbarAccount bg={"bgFavorite"} />
         <div className="max-w-[1200px] w-full h-[600px] mx-auto bg-[#553E58] rounded-2xl text-white border border-gray-500">
           <div className="w-full h-full p-7 ">
             <h1 className="font-bold text-4xl text-white text-center pb-10 ">
@@ -50,35 +49,46 @@ const SaveShow = () => {
                     <th className="text-[#F20000]">Acion</th>
                   </tr>
                 </thead>
-                {movie?.map((item) => (
-                  <tbody key={item.id}>
-                    <tr className="h-[100px] border">
-                      <td className=" h-[100px] text-center flex items-center justify-center ">
-                        <img
-                          src={item?.poster_path}
-                          width="60px"
-                          className="border-2"
-                        />
-                      </td>
-                      <td className=" text-center">{item?.title}</td>
-                      <td className=" text-center">{item?.genre}</td>
-                      <td className=" text-center">{item?.release_date}</td>
-                      <td className=" text-center space-x-3">
-                        <Link to={`/detail/${item.id}`} state={{ from: item }}>
-                          <button className="text-2xl">
-                            <FaEye />
+                {movie?.map((item) => {
+                  const timestamp = item?.release_date.seconds; // This would be the timestamp you want to format
+                  const time = new Intl.DateTimeFormat("en-US", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }).format(timestamp * 1000);
+                  return (
+                    <tbody key={item.id}>
+                      <tr className="h-[100px] border">
+                        <td className=" h-[100px] text-center flex items-center justify-center ">
+                          <img
+                            src={item?.poster_path}
+                            width="60px"
+                            className="border-2"
+                          />
+                        </td>
+                        <td className=" text-center">{item?.title}</td>
+                        <td className=" text-center">{item?.genre}</td>
+                        <td className=" text-center">{time}</td>
+                        <td className=" text-center space-x-3">
+                          <Link
+                            to={`/detail/${item.id}`}
+                            state={{ from: item }}
+                          >
+                            <button className="text-2xl">
+                              <FaEye />
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() => deleteShow(item.id)}
+                            className="text-2xl"
+                          >
+                            <MdDeleteForever />
                           </button>
-                        </Link>
-                        <button
-                          onClick={() => deleteShow(item.id)}
-                          className="text-2xl"
-                        >
-                          <MdDeleteForever />
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                ))}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
               </table>
             </div>
           </div>

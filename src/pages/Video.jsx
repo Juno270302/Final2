@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoReturnDownBack } from "react-icons/io5";
+import ReactPlayer from "react-player";
 
 const Video = () => {
   const use = useLocation();
@@ -10,34 +11,40 @@ const Video = () => {
   console.log(age);
 
   useEffect(() => {
-    if (movie.limit === "Limit") {
+    if (movie?.limit === "Limit") {
       setAge(false);
     }
   }, [movie]);
 
   const handleOver = () => {
-    setAge(true)
-  }
+    setAge(true);
+  };
 
   const handleUnder = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   return (
     <div className="w-full h-screen bg-[#212140] ">
       {age ? (
         <div className="px-52 py-16 w-full h-full">
           <div className=" w-full h-full mt-5">
-            <Link to={`/detail/${movie.id}`} state={{ from: movie }}>
+            <Link to={`/detail/${movie?.id}`} state={{ from: movie }}>
               <div className="py-5 pl-10 text-3xl text-white flex items-center space-x-2">
                 <IoReturnDownBack />
-                <p>{movie.title}</p>
+                <p>{movie?.title}</p>
               </div>
             </Link>
+
             <div>
-              <video width="1250" className="mx-auto" controls>
-                <source src={movie.video.video} type="video/mp4" />
-              </video>
+              <div className="w-[1250px] h-[500px] mx-auto mt-10">
+                <ReactPlayer
+                  width={1250}
+                  height={600}
+                  controls
+                  url={movie?.video?.video}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -50,8 +57,18 @@ const Video = () => {
                   <h1 className=" font-main text-2xl">
                     You must be 18 to Watch{" "}
                   </h1>
-                  <button onClick={handleOver} className="border w-[80%] font-main text-xl py-2 hover:text-[#F20000] hover:bg-[#E0D5D5]">I'm Over 18</button>
-                  <button onClick={handleUnder} className="border w-[80%] font-main text-xl py-2 hover:text-[#F20000] hover:bg-[#E0D5D5]">I'm under 18</button>
+                  <button
+                    onClick={handleOver}
+                    className="border w-[80%] font-main text-xl py-2 hover:text-[#F20000] hover:bg-[#E0D5D5]"
+                  >
+                    I'm Over 18
+                  </button>
+                  <button
+                    onClick={handleUnder}
+                    className="border w-[80%] font-main text-xl py-2 hover:text-[#F20000] hover:bg-[#E0D5D5]"
+                  >
+                    I'm under 18
+                  </button>
                 </div>
               </div>
             </div>

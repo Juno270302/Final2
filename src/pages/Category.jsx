@@ -11,9 +11,6 @@ const Category = () => {
 
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  console.log(data);
-  console.log(movie);
-  console.log(search);
 
   useEffect(() => {
     onSnapshot(collection(db, "movies"), (snapShot) => {
@@ -49,7 +46,7 @@ const Category = () => {
           <input
             onChange={(e) => setSearch(e.target.value)}
             type="text"
-            className="w-[250px] py-2 rounded-xl"
+            className="w-[250px] py-2 rounded-xl px-5"
           />
         </div>
         <div className="px-36 w-full h-full space-y-7 mt-10 ">
@@ -58,23 +55,32 @@ const Category = () => {
               e.title.toLowerCase().includes(search.toLowerCase(search))
             )
             .filter((e) => e.genre?.includes(movie))
-            .map((item, index) => (
-              <Link to={`/detail/${item.id}`} state={{ from: item }}>
-                <div className="w-full h-full border flex flex-row rounded-xl mb-5">
-                  <img
-                    src={item.poster_path}
-                    className="w-[100px]  rounded-l-xl"
-                  />
-                  <div className="text-white px-10 py-3">
-                    <h1 className="text-xl hover:text-[#F20000]">
-                      {item.title}
-                    </h1>
-                    <p className="text-gray-400">{item.release_date}</p>
-                    <p>{item.overview}</p>
+            .map((item, index) => {
+              const timestamp = item?.release_date.seconds; // This would be the timestamp you want to format
+
+              const time = new Intl.DateTimeFormat("en-US", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              }).format(timestamp * 1000);
+              return (
+                <Link to={`/detail/${item.id}`} state={{ from: item }}>
+                  <div className="w-full h-full border flex flex-row rounded-xl mb-5 bg-[#E0D5D5]/30">
+                    <img
+                      src={item.poster_path}
+                      className="w-[100px]  rounded-l-xl"
+                    />
+                    <div className="text-white px-10 py-3">
+                      <h1 className="text-xl hover:text-[#F20000]">
+                        {item.title}
+                      </h1>
+                      <p className="text-gray-400">{time}</p>
+                      <p>{item.overview}</p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
         </div>
       </div>
     </div>

@@ -12,6 +12,8 @@ const MySwal = withReactContent(Swal);
 
 const AuthorShow = () => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState("");
+  console.log(data);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "authors"), (snapShot) => {
@@ -46,13 +48,20 @@ const AuthorShow = () => {
         <NavbarAdmin bg={"bgAuthor"} />
         <div className="max-w-[1200px] h-full mx-auto bg-[#553E58] rounded-3xl text-white ">
           <div className="w-full h-full p-7 ">
-            <div className="flex w-full  items-center justify-center py-5">
-              <div className="w-[55%] ">
+            <div className="flex w-full  items-center justify-between py-5">
+              <div className="">
+                <input
+                  className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search Contacts"
+                />
+              </div>
+              <div className="w-full ">
                 <h1 className="font-bold text-4xl text-white  float-right  ">
                   Author
                 </h1>
               </div>
-              <div className="w-[40%] ">
+              <div className="w-full ">
                 <Link to={`/admin/addauthor`}>
                   <button className="font-bold text-[#F20000] float-right bg-[#E0D5D5] rounded-2xl px-6 py-2">
                     Add
@@ -71,56 +80,62 @@ const AuthorShow = () => {
                     <th>Acion</th>
                   </tr>
                 </thead>
-                {data?.map((item) => {
-                  const timestamp = item?.birthday.seconds; // This would be the timestamp you want to format
+                {data
+                  ?.filter((item) => {
+                    return search?.toLowerCase() === ""
+                      ? item
+                      : item.name_cast?.toLowerCase().includes(search);
+                  })
+                  ?.map((item) => {
+                    const timestamp = item?.birthday.seconds; // This would be the timestamp you want to format
 
-                  const time = new Intl.DateTimeFormat("en-US", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }).format(timestamp * 1000);
+                    const time = new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }).format(timestamp * 1000);
 
-                  return (
-                    <tbody key={item.id}>
-                      <tr className="h-[100px] border">
-                        <td className=" h-[100px] text-center flex items-center justify-center ">
-                          <img
-                            src={item?.img_cast}
-                            width="60px"
-                            className="border-2"
-                          />
-                        </td>
-                        <td className=" text-center overflow-auto scrollbar-hide">
-                          {item?.name_cast}
-                        </td>
-                        <td className=" text-center overflow-auto scrollbar-hide">
-                          {item?.gender}
-                        </td>
-                        <td className=" text-center overflow-auto scrollbar-hide">
-                          {time}
-                        </td>
-                        <td className=" text-center space-x-3">
-                          <Link
-                            to={`/admin/update/author/${item.id}`}
-                            state={{ from: item }}
-                          >
-                            <button className="text-2xl">
-                              <FaEye />
+                    return (
+                      <tbody key={item.id}>
+                        <tr className="h-[100px] border">
+                          <td className=" h-[100px] text-center flex items-center justify-center ">
+                            <img
+                              src={item?.img_cast}
+                              width="60px"
+                              className="border-2"
+                            />
+                          </td>
+                          <td className=" text-center overflow-auto scrollbar-hide">
+                            {item?.name_cast}
+                          </td>
+                          <td className=" text-center overflow-auto scrollbar-hide">
+                            {item?.gender}
+                          </td>
+                          <td className=" text-center overflow-auto scrollbar-hide">
+                            {time}
+                          </td>
+                          <td className=" text-center space-x-3">
+                            <Link
+                              to={`/admin/update/author/${item.id}`}
+                              state={{ from: item }}
+                            >
+                              <button className="text-2xl">
+                                <FaEye />
+                              </button>
+                            </Link>
+                            <button
+                              onClick={() =>
+                                handleDelete(item.id, item?.name_cast)
+                              }
+                              className="text-2xl"
+                            >
+                              <MdDeleteForever />
                             </button>
-                          </Link>
-                          <button
-                            onClick={() =>
-                              handleDelete(item.id, item?.name_cast)
-                            }
-                            className="text-2xl"
-                          >
-                            <MdDeleteForever />
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
               </table>
             </div>
           </div>

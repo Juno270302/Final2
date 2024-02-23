@@ -73,17 +73,17 @@ const Navbar = () => {
           </Link>
           <Link to="movies">
             <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-              Movies
+              Phim Lẻ
             </button>
           </Link>
           <Link to="crmovie">
             <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-              Exclusive movies
+              Phim Thuê
             </button>
           </Link>
           <Link to="authors">
             <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-              Authors
+              Tác giả
             </button>
           </Link>
           <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">

@@ -1,7 +1,7 @@
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
-import { doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -14,14 +14,15 @@ const CheckoutForm = ({ data }) => {
   const elements = useElements();
   const navigate = useNavigate();
 
+  console.log(data);
+
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const today = new Date();
   const priorDate = new Date(new Date().setDate(today.getDate() + 30));
 
-  console.log(today);
-  console.log(priorDate);
+
 
   const handleSuccess = () => {
     MySwal.fire({
@@ -60,6 +61,14 @@ const CheckoutForm = ({ data }) => {
         member: "VIP",
         member_date: priorDate,
       });
+
+      const docRef = await addDoc(collection(db, "payments"), {
+        email: data?.email,
+        username: data?.username,
+        money: 10,
+        date: today,
+      });
+
       navigate("/");
     }
 

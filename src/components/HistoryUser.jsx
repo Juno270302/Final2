@@ -26,29 +26,38 @@ const HistoryUser = () => {
             <th className="text-[#F20000]">Acion</th>
           </tr>
         </thead>
-        {movie?.map((item) => (
-          <tbody key={item.id}>
-            <tr className="h-[100px] border">
-              <td className=" h-[100px] text-center flex items-center justify-center ">
-                <img
-                  src={item?.poster_path}
-                  width="60px"
-                  className="border-2"
-                />
-              </td>
-              <td className=" text-center">{item?.title}</td>
-              <td className=" text-center">{item?.genre}</td>
-              <td className=" text-center">{item?.release_date}</td>
-              <td className=" text-center space-x-3">
-                <Link to={`/detail/${item.id}`} state={{ from: item }}>
-                  <button className="text-2xl">
-                    <FaEye />
-                  </button>
-                </Link>
-              </td>
-            </tr>
-          </tbody>
-        ))}
+        {movie?.map((item) => {
+          const timestamp = item?.release_date.seconds; // This would be the timestamp you want to format
+          console.log(timestamp);
+          const time = new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }).format(timestamp * 1000);
+          return (
+            <tbody key={item.id}>
+              <tr className="h-[100px] border">
+                <td className=" h-[100px] text-center flex items-center justify-center ">
+                  <img
+                    src={item?.poster_path}
+                    width="60px"
+                    className="border-2"
+                  />
+                </td>
+                <td className=" text-center">{item?.title}</td>
+                <td className=" text-center">{item?.genre}</td>
+                <td className=" text-center">{time}</td>
+                <td className=" text-center space-x-3">
+                  <Link to={`/detail/${item.id}`} state={{ from: item }}>
+                    <button className="text-2xl">
+                      <FaEye />
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
       </table>
     </div>
   );
