@@ -78,7 +78,7 @@ const Navbar = () => {
           </Link>
           <Link to="crmovie">
             <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-              Phim Thuê
+              Phim độc quyền
             </button>
           </Link>
           <Link to="authors">

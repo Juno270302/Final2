@@ -8,8 +8,8 @@ const Authors = () => {
   const [data, setData] = useState();
   const [search, setSearch] = useState("");
   const [roleAuthor, setRoleAuthor] = useState([]);
-  const [role, setRole] = useState(null)
-  console.log(role)
+  const [role, setRole] = useState(null);
+  console.log(role);
 
   useEffect(() => {
     onSnapshot(collection(db, "authors"), (snapShot) => {
@@ -33,13 +33,14 @@ const Authors = () => {
 
   return (
     <div className="bg-[#212140] h-screen w-full">
-      <div className="w-[90%] h-full py-36 px-40 mx-16 ">
-        <div className="flex justify-between ml-20 ">
-          <div className="flex p-5 text-white float-right ">
-            
-          </div>
-          <div className="flex p-5 text-black float-right w-[1130px]">
-            <select className="w-full rounded" onChange={(e) => setRole(e.target.value)}>
+      <div className="w-full h-full py-36 px-40  lg:px-10 sm:px-0">
+        <div className="flex justify-between  ">
+          <div className="flex p-5 text-white float-right "></div>
+          <div className="flex p-5 text-black float-right w-[1030px]">
+            <select
+              className="w-full rounded"
+              onChange={(e) => setRole(e.target.value)}
+            >
               <option>All</option>
               {roleAuthor.map((item, index) => (
                 <option key={index}>{item.key}</option>
@@ -48,7 +49,7 @@ const Authors = () => {
           </div>
 
           <div className="flex justify-center space-x-5 ">
-            <form className="py-5 space-x-5 w-full text-right">
+            <form className="py-5 space-x-5 w-[250px] text-right">
               <input
                 onChange={(e) => setSearch(e.target.value)}
                 className="py-2 px-5 rounded-xl w-[90%] "
@@ -57,8 +58,8 @@ const Authors = () => {
           </div>
         </div>
 
-        <div className="ml-20 w-full">
-          <div className="w-full grid grid-cols-5 gap-6  ">
+        <div className=" w-full">
+          <div className="w-full grid grid-cols-6 gap-6  2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2">
             {author
               ?.filter((item) => {
                 if (role === "All" || role === null) {

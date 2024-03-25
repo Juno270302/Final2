@@ -39,7 +39,7 @@ const Review = ({ movie }) => {
   };
 
   return (
-    <div className="w-full h-full bg-[#080A1A] px-28 py-5">
+    <div className="w-full h-full bg-[#080A1A] px-28 py-5 2xl:px-24 xl:px-16 lg:px-10 sm:px-0">
       <div className="">
         <div className="flex flex-row space-x-3 py-14 text-2xl ">
           <p className="text-red-600 mt-1">
@@ -49,7 +49,7 @@ const Review = ({ movie }) => {
         </div>
       </div>
       <div>
-        <div className="bg-[#212140] w-full h-full rounded-2xl flex flex-row px-20 py-20">
+        <div className="bg-[#212140] w-full h-full rounded-2xl flex flex-row px-20 py-20  2xl:px-16 xl:px-10 lg:px-5 sm:px-0">
           <div className="basis-2/5 ">
             <form className="space-y-10 px-5" onSubmit={submitHandle}>
               <p className="font-body text-xl">Reviews "{movie?.title}"</p>

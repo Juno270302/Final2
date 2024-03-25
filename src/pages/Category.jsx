@@ -26,30 +26,30 @@ const Category = () => {
     <div>
       <div className="py-28 ">
         <div className="w-full border bg-[#E0D5D5] px-32 py-2">
-          <div className="px-32 flex flex-row space-x-6 items-center ">
-            <div>
+          <div className="px-32 w-full flex flex-row space-x-6 sm:px-0">
+            <div className="w-full">
               <div className="text-3xl font-main text-[#f20000]">{movie}</div>
-              <div>
-                <Link to={`/`} className="flex text-xl space-x-2">
+              <div className="w-full ">
+                <Link to={`/`} className="flex w-full text-xl space-x-2">
                   <span className="mt-1">
                     <IoArrowBack />
                   </span>
-                  <span>Back To main</span>
+                  <span className="w-full">Back To main</span>
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="-mt-24 px-36">
-        <div className="w-full h-full text-end px-36">
+      <div className="-mt-24 px-36 2xl:px-32 xl:px-20 lg:px-10 sm:px-0 ">
+        <div className="w-full h-full text-end px-36 ">
           <input
             onChange={(e) => setSearch(e.target.value)}
             type="text"
             className="w-[250px] py-2 rounded-xl px-5"
           />
         </div>
-        <div className="px-36 w-full h-full space-y-7 mt-10 ">
+        <div className="px-36 w-full h-full space-y-7 mt-10 2xl:px-32 xl:px-20 lg:px-10 sm:px-0">
           {data
             .filter((e) =>
               e.title.toLowerCase().includes(search.toLowerCase(search))

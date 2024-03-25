@@ -27,7 +27,7 @@ const AuthorDetail = () => {
 
   return (
     <div className="bg-[#212140] h-[1000px] w-full ">
-      <div className="w-[90%] px-40 pt-24 mx-20 ">
+      <div className="w-[90%] px-40 pt-24  2xl:px-32 xl:px-20 lg:px-10 sm:px-0">
         <div className="flex justify-between  ">
           <div className="text-white font-bold text-xl my-5 flex space-x-2 ml-20 w-full justify-center ">
             <p className=" text-center font-body text-[#E0D5D5] text-3xl"></p>
@@ -37,7 +37,7 @@ const AuthorDetail = () => {
           <div className="w-[30%] h-full">
             <div className="h-full w-full flex justify-center">
               <img
-                className="w-[300px] h-[440px] rounded-lg"
+                className="w-[300px] h-[440px] rounded-lg 2xl:h-[400px] xl:h-[350px] lg:h-[300px] sm:h-[250px]"
                 src={movie?.img_cast}
               />
             </div>

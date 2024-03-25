@@ -9,13 +9,17 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 const ChangePassword = () => {
   const { user } = UserAuth();
   const [users, setUsers] = useState();
-  console.log(users)
+  console.log(users);
 
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPasword, setConfirmPassword] = useState();
 
-  console.log(oldPassword === users?.password && newPassword === confirmPasword && newPassword?.length > 1)
+  console.log(
+    oldPassword === users?.password &&
+      newPassword === confirmPasword &&
+      newPassword?.length > 1
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,32 +42,36 @@ const ChangePassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (oldPassword === users.password && newPassword === confirmPasword && newPassword?.length> 1) {
+    if (
+      oldPassword === users.password &&
+      newPassword === confirmPasword &&
+      newPassword?.length > 1
+    ) {
       updatePassword(user, newPassword)
-      .then(() => {
-        const a = async() =>{
-          try {
-            const update = doc(db, "users", user.uid);
-            await updateDoc(update, {
-              password : newPassword,
-            });
-          } catch (error) {
-            console.log(error);
-          }
-        }
-        a();
-        alert("Hello")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        .then(() => {
+          const a = async () => {
+            try {
+              const update = doc(db, "users", user.uid);
+              await updateDoc(update, {
+                password: newPassword,
+              });
+            } catch (error) {
+              console.log(error);
+            }
+          };
+          a();
+          alert("Hello");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
   return (
     <div className="w-full  bg-[#212140]">
-      <div className="w-full px-10 py-40 flex flex-row">
-        <NavbarAccount bg={"bgPassword"}/>
+      <div className="w-full px-10 py-40 flex flex-row 2xl:px-16 xl:px-10 lg:px-5 sm:px-0">
+        <NavbarAccount bg={"bgPassword"} />
         <div className="max-w-[1200px] w-full h-[600px] mx-auto bg-[#553E58] rounded-2xl text-white border border-gray-500 ">
           <div className="w-full p-7 ">
             <h1 className="font-bold text-4xl text-white text-center py-6 ">

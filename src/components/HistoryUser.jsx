@@ -21,8 +21,8 @@ const HistoryUser = () => {
           <tr>
             <th className=" w-[20%] text-[#F20000]">Image</th>
             <th className="text-[#F20000]">Name</th>
-            <th className="text-[#F20000]">Category</th>
-            <th className="text-[#F20000]">Year</th>
+            <th className="text-[#F20000] sm:hidden">Category</th>
+            <th className="text-[#F20000] sm:hidden">Year</th>
             <th className="text-[#F20000]">Acion</th>
           </tr>
         </thead>
@@ -45,8 +45,8 @@ const HistoryUser = () => {
                   />
                 </td>
                 <td className=" text-center">{item?.title}</td>
-                <td className=" text-center">{item?.genre}</td>
-                <td className=" text-center">{time}</td>
+                <td className=" text-center sm:hidden">{item?.genre}</td>
+                <td className=" text-center sm:hidden">{time}</td>
                 <td className=" text-center space-x-3">
                   <Link to={`/detail/${item.id}`} state={{ from: item }}>
                     <button className="text-2xl">

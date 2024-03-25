@@ -72,7 +72,7 @@ const Dashboard = () => {
                 <div className="text-[50px] text-[#F20000] px-5">
                   <MdLocalMovies />
                 </div>
-                <div className="text-xl font-main">
+                <div className="text-xl font-main ">
                   <div>Total Movie</div>
                   <div>{movie.length}</div>
                 </div>

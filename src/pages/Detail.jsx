@@ -139,23 +139,25 @@ const Detail = () => {
   return (
     <div className="w-full h-full text-white  ">
       <div className="w-full h-full">
-        <div className="bg-[#212140]">
+        <div className="h-[1000px] bg-[#212140]">
           <img
             className="w-full h-full object-cover opacity-10 "
             src={movie?.backdrop_path}
             alt={movie?.title}
           />
         </div>
-        <div className="absolute top-[30%] w-full h-[560px] px-52 font-main">
-          <div className="flex space-x-14 h-full ">
+        <div className="absolute top-[30%] w-full h-[560px] px-52 font-main 2xl:px-40 xl:px-32 lg:px-10 sm:px-0">
+          <div className="flex space-x-14 h-full items-center 2xl:space-x-10 xl:space-x-8 lg:space-x-3 sm:space-x-1">
             <div className=" w-[40%] rounded-xl flex justify-end">
               <img
                 src={movie?.poster_path}
-                className="rounded-xl w-[400px] h-[100%]"
+                className="rounded-xl w-[400px] h-[100%] 2xl:h-[95%] xl:h-[90%] lg:h-[85%] sm:h-[80%]"
               />
             </div>
-            <div className="flex flex-col justify-center space-y-11 mb-32  h-full w-[65%] ">
-              <div className="font-body text-4xl">{movie?.title}</div>
+            <div className="flex flex-col justify-center space-y-11 mb-32  h-full w-[65%] 2xl:w-[60%] xl:w-[55%] lg:w-[50%] sm:w-[45%] 2xl:space-y-8 xl:space-y-6 lg:space-y-4 sm:space-y-4">
+              <div className="font-body text-4xl 2xl:text-3xl xl:text-3xl lg:text-3xl sm:">
+                {movie?.title}
+              </div>
               <div className="flex space-x-9">
                 <p className="bg-[#E0D5D5] text-[#F20000] px-2">HD 4K</p>
 
@@ -169,7 +171,7 @@ const Detail = () => {
                 </div>
               </div>
               <div className="flex flex-row space-x-3">
-                <p className="">Genre : </p>
+                <p className="">Genre: </p>
                 <p className=" flex flex-row space-x-3 max-w-[430px]">
                   {movie?.genre?.map((e) => (
                     <Link to={`../category/${e}`} state={e}>
@@ -178,11 +180,13 @@ const Detail = () => {
                   ))}
                 </p>
               </div>
-              <div className="w-[50%]">
+              <div className="w-[50%] 2xl:w-[70%] xl:w-[80%] lg:w-[90%] sm:w-[100%]">
                 {truncateString(movie?.overview, 150)}
               </div>
-              <div className="flex  space-x-14 items-center">
+              <div className="flex  space-x-14 items-center  ">
                 <div>Language : {movie?.language}</div>
+              </div>
+              <div className="flex  space-x-14 items-center  ">
                 <Link to={`/video/${movie?.id}`} state={movie}>
                   <button
                     onClick={() => historyShow(movie?.id)}

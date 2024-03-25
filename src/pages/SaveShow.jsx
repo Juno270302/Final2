@@ -31,7 +31,7 @@ const SaveShow = () => {
 
   return (
     <div className="w-full h-screen bg-[#212140]">
-      <div className="w-full h-[920px] px-10 py-40 flex flex-row">
+      <div className="w-full h-[920px] px-10 py-40 flex flex-row 2xl:px-16 xl:px-10 lg:px-5 sm:px-0">
         <NavbarAccount bg={"bgFavorite"} />
         <div className="max-w-[1200px] w-full h-[600px] mx-auto bg-[#553E58] rounded-2xl text-white border border-gray-500">
           <div className="w-full h-full p-7 ">
@@ -44,8 +44,8 @@ const SaveShow = () => {
                   <tr>
                     <th className=" w-[20%] text-[#F20000]">Image</th>
                     <th className="text-[#F20000]">Name</th>
-                    <th className="text-[#F20000]">Category</th>
-                    <th className="text-[#F20000]">Year</th>
+                    <th className="text-[#F20000] sm:hidden">Category</th>
+                    <th className="text-[#F20000] sm:hidden">Year</th>
                     <th className="text-[#F20000]">Acion</th>
                   </tr>
                 </thead>
@@ -67,8 +67,10 @@ const SaveShow = () => {
                           />
                         </td>
                         <td className=" text-center">{item?.title}</td>
-                        <td className=" text-center">{item?.genre}</td>
-                        <td className=" text-center">{time}</td>
+                        <td className=" text-center sm:hidden">
+                          {item?.genre}
+                        </td>
+                        <td className=" text-center sm:hidden">{time}</td>
                         <td className=" text-center space-x-3">
                           <Link
                             to={`/detail/${item.id}`}

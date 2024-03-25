@@ -7,6 +7,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { GoFileSubmodule } from "react-icons/go";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import NavbarAccount from "../components/NavbarAccount";
+import { FaCrown } from "react-icons/fa6";
 
 const Account = () => {
   const [usernameInput, setUsernameInput] = useState("");
@@ -93,22 +94,29 @@ const Account = () => {
 
   return (
     <div className="w-full bg-[#212140]">
-      <div className="w-full px-10 py-40 flex flex-row ">
+      <div className="w-full px-10 py-40 flex flex-row 2xl:px-16 xl:px-10 lg:px-5 sm:px-0 ">
         <NavbarAccount bg={"bgAccount"} />
         <div className="max-w-[1200px] w-full h-[600px] mx-auto bg-[#553E58] rounded-2xl text-white border border-gray-500">
           <div className="w-full p-7 ">
             <h1 className="font-bold text-4xl text-white text-center pt-3 pb-6">
-              Your Account
+              Your Account :
+              <span className="font-main ">
+                {users.member === "VIP" ? (
+                  <span className="text-yellow-300"> VIP</span>
+                ) : (
+                  <span> Member</span>
+                )}{" "}
+              </span>
             </h1>
             <form
               onSubmit={handleSubmit}
               className="flex flex-col items-center"
             >
-              <div className="flex w-full justify-between px-24 py-6">
+              <div className="flex w-full justify-between px-24 py-6 2xl:px-16 xl:px-10 lg:px-5 sm:px-0">
                 <div className="flex flex-col float-left items-center">
                   <img
                     src={file ? URL.createObjectURL(file) : users.img}
-                    className="w-[200px] h-[200px] rounded-full"
+                    className="w-[200px] h-[200px] rounded-full 2xl:h-[180px] 2xl:w-[180px] xl:h-[160px] xl:w-[160px]  lg:w-[140px]  lg:h-[140px]"
                   />
                   <div className="mt-5">
                     <label htmlFor="files" className="flex text-2xl">
@@ -123,16 +131,6 @@ const Account = () => {
                       onChange={(e) => setFile(e.target.files[0])}
                       style={{ display: "none" }}
                     />
-                  </div>
-                  <div className="mt-5 text-2xl ">
-                    <span className="font-main ">
-                      {users.member === "VIP" ? (
-                        <span className="text-yellow-300">VIP</span>
-                      ) : (
-                        ""
-                      )}{" "}
-                      Member
-                    </span>
                   </div>
                 </div>
                 <div className="flex flex-col float-right mr-10">
