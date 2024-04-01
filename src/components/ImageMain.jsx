@@ -31,14 +31,9 @@ const ImageMain = () => {
     }
   };
 
-  const data = [
-    { title: "One", prix: 100 },
-    { title: "Two", prix: 200 },
-    { title: "Three", prix: 300 },
-  ];
+
 
   let c = movie?.chat?.reduce((a, v) => (a = a + v.evaluate), 0);
-  console.log(c);
   let d = c / movie?.chat?.length;
 
   const timestamp = movie?.release_date.seconds; // This would be the timestamp you want to format

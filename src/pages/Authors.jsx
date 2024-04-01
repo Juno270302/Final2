@@ -38,7 +38,7 @@ const Authors = () => {
           <div className="flex p-5 text-white float-right "></div>
           <div className="flex p-5 text-black float-right w-[1030px]">
             <select
-              className="w-full rounded"
+              class=" mx-10 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               onChange={(e) => setRole(e.target.value)}
             >
               <option>All</option>

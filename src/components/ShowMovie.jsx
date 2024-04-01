@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ShowMovie = ({ item, index }) => {
- 
   return (
     <div
       key={index}

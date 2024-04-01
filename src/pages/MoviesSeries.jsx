@@ -48,9 +48,9 @@ const MoviesSeries = () => {
 
   return (
     <div className="bg-[#212140] h-screen w-full ">
-      <div className="absolute w-[90%] top-36 px-40 mx-16 ">
+      <div className="absolute w-full top-36 px-32 2xl:px-10 lg:px-0">
         <div className="flex justify-between  ">
-          <div className="text-white font-bold text-xl my-5 flex space-x-2 ml-20 ">
+          <div className="text-white font-bold text-xl my-5 flex space-x-2 lg:hidden ">
             <span>Total</span>
             <span className="text-red-600"> {count} </span>
             <span>items Found</span>
@@ -58,7 +58,7 @@ const MoviesSeries = () => {
           <div className="w-[30%] flex p-5 mx-5 ">
             <select
               onChange={(e) => handleSelect(e)}
-              class=" mx-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class=" mx-10 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
             >
               <option>All</option>
               {genre.map((option) => (
@@ -77,7 +77,7 @@ const MoviesSeries = () => {
           </div>
         </div>
 
-        <div className="ml-20 w-full">
+        <div className="w-full grid grid-cols-4 gap-4 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 justify-center">
           {movies
             .filter((e) => e.license?.includes("None"))
             .filter((e) =>
@@ -91,7 +91,6 @@ const MoviesSeries = () => {
               }
             })
             .map((item, index) => {
-
               return <ShowMovie item={item} index={index} />;
             })}
         </div>

@@ -57,28 +57,51 @@ const Category = () => {
             .filter((e) => e.genre?.includes(movie))
             .map((item, index) => {
               const timestamp = item?.release_date.seconds; // This would be the timestamp you want to format
-
+              console.log(item);
               const time = new Intl.DateTimeFormat("en-US", {
                 year: "numeric",
                 month: "2-digit",
                 day: "2-digit",
               }).format(timestamp * 1000);
               return (
-                <Link to={`/detail/${item.id}`} state={{ from: item }}>
-                  <div className="w-full h-full border flex flex-row rounded-xl mb-5 bg-[#E0D5D5]/30">
-                    <img
-                      src={item.poster_path}
-                      className="w-[100px]  rounded-l-xl"
-                    />
-                    <div className="text-white px-10 py-3">
-                      <h1 className="text-xl hover:text-[#F20000]">
-                        {item.title}
-                      </h1>
-                      <p className="text-gray-400">{time}</p>
-                      <p>{item.overview}</p>
-                    </div>
-                  </div>
-                </Link>
+                <div>
+                  {item?.license === "VIP" ? (
+                    <Link to={`/crmovie`}>
+                      <div className="w-full h-full border flex flex-row rounded-xl mb-5 bg-[#E0D5D5]/30">
+                        <img
+                          src={item.poster_path}
+                          className="w-[100px]  rounded-l-xl"
+                        />
+                        <div className="text-white px-10 py-3">
+                          <h1 className="text-xl hover:text-[#F20000]">
+                            {item.title}
+                          </h1>
+                          <p className="text-gray-400">{time}</p>
+                          <p>{item.overview}</p>
+                        </div>
+                        <div className="w-[15%] flex justify-center items-center px-3 bg-slate-100 rounded-2xl font-main text-[#F20000]">
+                          Độc Quyền
+                        </div>
+                      </div>
+                    </Link>
+                  ) : (
+                    <Link to={`/detail/${item.id}`} state={{ from: item }}>
+                      <div className="w-full h-full border flex flex-row rounded-xl mb-5 bg-[#E0D5D5]/30">
+                        <img
+                          src={item.poster_path}
+                          className="w-[100px]  rounded-l-xl"
+                        />
+                        <div className="text-white px-10 py-3">
+                          <h1 className="text-xl hover:text-[#F20000]">
+                            {item.title}
+                          </h1>
+                          <p className="text-gray-400">{time}</p>
+                          <p>{item.overview}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
+                </div>
               );
             })}
         </div>

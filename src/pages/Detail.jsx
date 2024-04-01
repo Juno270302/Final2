@@ -208,7 +208,7 @@ const Detail = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#080A1A] h-[500px] w-full px-28 ">
+        <div className="bg-[#080A1A] h-[500px] w-full px-28 2xl:px-24 xl:px-16 lg:px-10 sm:px-0">
           <div className=" ">
             <div className="flex flex-row space-x-3 py-14 text-2xl ">
               <p className="text-red-600 mt-1">

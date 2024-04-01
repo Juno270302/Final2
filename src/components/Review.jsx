@@ -49,7 +49,7 @@ const Review = ({ movie }) => {
         </div>
       </div>
       <div>
-        <div className="bg-[#212140] w-full h-full rounded-2xl flex flex-row px-20 py-20  2xl:px-16 xl:px-10 lg:px-5 sm:px-0">
+        <div className="bg-[#212140] w-full h-full rounded-2xl flex flex-row px-20 py-20  2xl:px-16 xl:px-10 lg:px-5 sm:px-0 lg:flex-col">
           <div className="basis-2/5 ">
             <form className="space-y-10 px-5" onSubmit={submitHandle}>
               <p className="font-body text-xl">Reviews "{movie?.title}"</p>
@@ -88,10 +88,15 @@ const Review = ({ movie }) => {
               </button>
             </form>
           </div>
-          <div className="basis-3/5">
-            <div className="px-10 ml-5 space-y-6">
-              <h1 className="font-body text-xl ml-5">Reviews</h1>
-              <div className="bg-[#080A1A]/90 w-full h-[500px] overflow-y-scroll scrollbar-hide scroll-smooth rounded">
+          <div className="basis-3/5 lg:py-20 ">
+            <div className="px-10 ml-5 space-y-6 lg:px-0">
+              <h1 className="font-body text-xl ml-5 w-full lg:hidden">
+                Reviews
+              </h1>
+              <div className="bg-[#080A1A]/90 w-full h-[500px] overflow-y-scroll scrollbar-hide scroll-smooth rounded lg:h-[800px]">
+                <h1 className="font-body text-xl ml-5 w-full hidden lg:block py-3">
+                  Reviews
+                </h1>
                 {movie?.chat
                   ?.slice()
                   ?.reverse()
