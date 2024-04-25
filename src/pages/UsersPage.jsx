@@ -12,7 +12,6 @@ const UsersPage = () => {
     <div className="w-full h-[911px] text-white  ">
       <ImageMain />
       <Movie />
-      <Footer />
     </div>
   );
 };

@@ -3,35 +3,49 @@ import React, { useState } from "react";
 import { db } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const AddGenre = () => {
-  const [name, setName] = useState();
+  const [name, setName] = useState("");
   const navigate = useNavigate();
+
+  const MySwal = withReactContent(Swal);
+  const handleError = () => {
+    MySwal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      Swal.fire({
-        title: `Add ${name}`,
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Accept",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const docRef = await addDoc(collection(db, "genres"), {
-            key: name,
-          });
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `Add  ${name} success`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/admin/genreshow");
-        }
-      });
+      if (name != "") {
+        Swal.fire({
+          title: `Add ${name}`,
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Accept",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const docRef = await addDoc(collection(db, "genres"), {
+              key: name,
+            });
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `Add  ${name} success`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/admin/genreshow");
+          }
+        });
+      } else {
+        handleError();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +78,7 @@ const AddGenre = () => {
                     type="submit"
                     className="w-full border py-3 mt-[30px] font-body bg-[#E0D5D5] text-[#f20000] border-white/70  rounded"
                   >
-                    Pusblish Movie
+                    Pusblish Genre
                   </button>
                 </div>
               </form>

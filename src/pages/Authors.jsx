@@ -48,7 +48,7 @@ const Authors = () => {
             </select>
           </div>
 
-          <div className="flex justify-center space-x-5 ">
+          <div className="flex justify-center space-x-5 mr-10">
             <form className="py-5 space-x-5 w-[250px] text-right">
               <input
                 onChange={(e) => setSearch(e.target.value)}

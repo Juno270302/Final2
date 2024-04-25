@@ -80,7 +80,7 @@ const Category = () => {
                           <p>{item.overview}</p>
                         </div>
                         <div className="w-[15%] flex justify-center items-center px-3 bg-slate-100 rounded-2xl font-main text-[#F20000]">
-                          Độc Quyền
+                          Exclusive
                         </div>
                       </div>
                     </Link>

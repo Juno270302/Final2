@@ -7,17 +7,11 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { logIn, user } = UserAuth();
-  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     await e.preventDefault();
     try {
       const a = await logIn(email, password);
-      if (email === "" || password === "" || user === null) {
-        const interval = setInterval(() => {
-          setError(true);
-        }, 1000);
-      }
     } catch (error) {
       console.log(error);
     }
@@ -30,9 +24,6 @@ const Login = () => {
           <div className="max-w-[320px] mx-auto py-16">
             <div className="flex justify-between items-center">
               <h1 className="font-bold text-4xl text-white">Login</h1>
-              {error && (
-                <p className="text-red-600 font-bold">Please Login Again</p>
-              )}
             </div>
             <form
               onSubmit={handleSubmit}

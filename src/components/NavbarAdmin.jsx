@@ -47,7 +47,7 @@ const NavbarAdmin = ({ bg }) => {
             }
           >
             <ImProfile />
-            Product Management
+            Movies Management
           </div>
         </Link>
         <Link to="/admin/authorshow">

@@ -52,7 +52,7 @@ const AdminPage = () => {
                 <input
                   className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search Contacts"
+                  placeholder="Search"
                 />
               </div>
               <div className=" w-full">
@@ -162,7 +162,7 @@ const AdminPage = () => {
                               onClick={() => handleDelete(item.id, item.title)}
                               className="text-2xl hover:text-[#F20000]"
                               data-te-toggle="tooltip"
-                                title="Delete"
+                              title="Delete"
                             >
                               <MdDeleteForever />
                             </button>

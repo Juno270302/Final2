@@ -197,11 +197,11 @@ const UpdateProduct = () => {
             heightAuto: 123,
             position: "top-end",
             icon: "success",
-            title: `Add ${title ? title : movie.title} movie success`,
+            title: `Update ${title ? title : movie.title} movie success`,
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/");
+          navigate("/admin");
         }
       });
     } catch (error) {

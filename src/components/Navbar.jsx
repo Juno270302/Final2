@@ -15,7 +15,7 @@ const Navbar = () => {
   const userInfo = Role();
   const [users, setUsers] = useState({});
   const [data, setData] = useState();
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(true);
 
   console.log(data);
 
@@ -49,6 +49,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
+      setMenu(true);
       await logOut();
       navigate("/login");
     } catch (error) {
@@ -71,35 +72,42 @@ const Navbar = () => {
           {users?.role === "admin" ? (
             <div className="flex items-center ml-12 px-10 space-x-10 lg:hidden "></div>
           ) : (
-            <div className="flex items-center ml-12 px-10 space-x-10 lg:hidden ">
-              <Link to="/">
+            <div>
+              <div className="flex items-center ml-12 px-10 space-x-10 lg:hidden ">
+                <Link to="/">
+                  <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
+                    Home
+                  </button>
+                </Link>
+                <Link to="movies">
+                  <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
+                    Movies
+                  </button>
+                </Link>
+                <Link to="crmovie">
+                  <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
+                    Exclusive movie
+                  </button>
+                </Link>
+
+                <Link to="authors">
+                  <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
+                    Authors
+                  </button>
+                </Link>
                 <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Home
+                  About Us
                 </button>
-              </Link>
-              <Link to="movies">
-                <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Phim Lẻ
-                </button>
-              </Link>
-              <Link to="crmovie">
-                <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Phim độc quyền
-                </button>
-              </Link>
-              <Link to="chooseCategory">
-                <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Thể loại
-                </button>
-              </Link>
-              <Link to="authors">
-                <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Tác giả
-                </button>
-              </Link>
-              <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                About Us
-              </button>
+              </div>
+              {user?.email ? (
+                <div className="hidden  items-center px-10 text-[45px] text-[#E68AAB] lg:block">
+                  <button onClick={() => setMenu(!menu)}>
+                    <MdMenu />
+                  </button>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
           )}
           {user?.email ? (
@@ -133,11 +141,6 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-          <div className="hidden  items-center px-10 text-[45px] text-[#E68AAB] lg:block">
-            <button onClick={() => setMenu(!menu)}>
-              <MdMenu />
-            </button>
-          </div>
         </div>
       ) : (
         <div className="z-[100] absolute bg-[#212140] text-white w-full py-4  font-main h-full">
@@ -150,7 +153,7 @@ const Navbar = () => {
                 </h1>
               </div>
             </Link>
-            <div className="hidden  px-10 text-[45px] text-[#E68AAB] lg:block">
+            <div className="  items-center px-10 text-[45px] text-[#E68AAB] lg:block">
               <button onClick={() => setMenu(!menu)}>
                 <MdMenu />
               </button>
@@ -182,23 +185,23 @@ const Navbar = () => {
 
               <Link onClick={() => setMenu(!menu)} to="movies">
                 <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Phim Lẻ
+                  Movies
                 </button>
               </Link>
 
               <Link onClick={() => setMenu(!menu)} to="crmovie">
                 <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Phim độc quyền
+                  Exclusive movie
                 </button>
               </Link>
               <Link onClick={() => setMenu(!menu)} to="chooseCategory">
                 <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Thể loại
+                  Genres
                 </button>
               </Link>
               <Link onClick={() => setMenu(!menu)} to="authors">
                 <button className="text-[#ffffff] hover:text-[#fb9bbc] font-bold text-xl">
-                  Tác giả
+                  Authors
                 </button>
               </Link>
               <button

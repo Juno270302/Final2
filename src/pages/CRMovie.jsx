@@ -84,14 +84,14 @@ const CRMovie = () => {
     <div className="h-full w-full">
       {data?.member === "VIP" ? (
         <div className="bg-[#212140] h-screen w-full ">
-          <div className="absolute w-full top-36  px-40 mx-16 ">
+          <div className="absolute w-full top-36 px-32 2xl:px-10 lg:px-0">
             <div className="flex justify-between  ">
-              <div className="text-white font-bold text-xl my-5 flex space-x-2 ml-20 ">
+              <div className="text-white font-bold text-xl my-5 flex space-x-2 lg:hidden ">
                 <span>Total</span>
                 <span className="text-red-600"> {count} </span>
                 <span>items Found</span>
               </div>
-              <div className="w-[30%] flex p-5 mx-5 ">
+              <div className="w-[50%] flex p-5 mx-5 ">
                 <select
                   onChange={(e) => handleSelect(e)}
                   class=" mx-10 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,7 +103,7 @@ const CRMovie = () => {
                 </select>
               </div>
 
-              <div className="flex justify-center space-x-5 ">
+              <div className="flex justify-center space-x-5 mr-10">
                 <form className="py-5 space-x-5 w-full text-right">
                   <input
                     className="py-2 px-5 rounded-xl w-[90%] "
@@ -113,7 +113,7 @@ const CRMovie = () => {
               </div>
             </div>
 
-            <div className="ml-20 w-full">
+            <div className="w-full grid grid-cols-4 gap-4 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 justify-center">
               {movies
                 .filter((e) => e.license?.includes("VIP"))
                 .filter((e) =>
@@ -137,11 +137,11 @@ const CRMovie = () => {
           <div className=" w-full h-full px-52 2xl:px-40 xl:px-32 lg:px-5 sm:px-0">
             <div className=" w-full p-5 h-full bg-[#212140]">
               <div className="border-2 w-full h-full ">
-                <div className=" px-6 py-12 space-y-11 flex flex-col items-center justify-center 2xl:px-28 xl:px-32 lg:px-20 sm:px-0">
-                  <div className=" w-full h-[450px] max-w-96 px-10 mt-8">
+                <div className=" px-6 py-16 space-y-11 flex flex-col items-center justify-center 2xl:px-28 xl:px-32 lg:px-20 sm:px-0">
+                  <div className=" w-full h-[450px] max-w-96 px-10">
                     <div className="w-full h-full border bg-[#E0D5D5] rounded-xl space-y-9">
                       <div className="text-[#f20000] text-center text-2xl font-main mt-10 ">
-                        Phim độc quyền
+                        Exclusive movie
                       </div>
                       <div className="text-black space-y-5 ml-6">
                         <p>+ Gần 200 phim độc quyền</p>
@@ -153,7 +153,7 @@ const CRMovie = () => {
 
                       <div className="text-center space-y-3">
                         <div className="text-black text-center font-main">
-                          Gói 10$ / 30 ngày
+                          10$ / 30 Day
                         </div>
                         <Link to={`/checkout/${user.uid}`} state={data}>
                           <button className="mt-3 bg-[#f20000] px-3 py-2 rounded-xl text-[#E0D5D5] font-main text-xl">

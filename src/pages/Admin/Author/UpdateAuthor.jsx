@@ -92,7 +92,7 @@ const UpdateAuthor = () => {
 
     try {
       Swal.fire({
-        title: `Add ${name ?? author?.name_cast}`,
+        title: `Update ${name ?? author?.name_cast}`,
         icon: "success",
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
@@ -112,7 +112,7 @@ const UpdateAuthor = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `Add ${name ?? author?.name_cast} movie success`,
+            title: `Update ${name ?? author?.name_cast}  success`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -240,7 +240,7 @@ const UpdateAuthor = () => {
                     type="submit"
                     className="w-full border border-white/70 py-3 mt-[30px] font-body bg-[#E0D5D5] text-[#F20000]  rounded"
                   >
-                    Pusblish Movie
+                    Pusblish Auhor
                   </button>
                 </div>
               </form>

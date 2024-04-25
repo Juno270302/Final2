@@ -10,6 +10,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { signUp } = UserAuth();
   const navigate = useNavigate();
 
@@ -20,15 +21,26 @@ const Signup = () => {
       timer: 2000,
     });
   };
+  const handleError = () => {
+    MySwal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  };
 
   const handleSubmit = async (e) => {
     await e.preventDefault();
-    try {
-      const check = await signUp(email, password, name);
-      handleSuccess();
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+    if (confirmPassword === password) {
+      try {
+        const check = await signUp(email, password, name);
+        handleSuccess();
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      handleError();
     }
   };
 
@@ -59,6 +71,13 @@ const Signup = () => {
                 className="p-3 my-2 bg-[#2E2439] rounded placeholder-gray-400"
                 type="password"
                 placeholder="Password"
+                autoComplete="current-passowrd"
+              />
+              <input
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="p-3 my-2 bg-[#2E2439] rounded placeholder-gray-400"
+                type="password"
+                placeholder="Confirm Password"
                 autoComplete="current-passowrd"
               />
               <button

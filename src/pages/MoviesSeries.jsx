@@ -55,7 +55,7 @@ const MoviesSeries = () => {
             <span className="text-red-600"> {count} </span>
             <span>items Found</span>
           </div>
-          <div className="w-[30%] flex p-5 mx-5 ">
+          <div className="w-[30%] flex p-5 mx-5 xl:w-[40%] sm:w-[50%]">
             <select
               onChange={(e) => handleSelect(e)}
               class=" mx-10 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
@@ -67,7 +67,7 @@ const MoviesSeries = () => {
             </select>
           </div>
 
-          <div className="flex justify-center space-x-5 ">
+          <div className="flex justify-center space-x-5  mr-10">
             <form className="py-5 space-x-5 w-full text-right">
               <input
                 className="py-2 px-5 rounded-xl w-[90%] "

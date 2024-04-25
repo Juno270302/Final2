@@ -4,12 +4,36 @@ import { BsDot } from "react-icons/bs";
 import { CiPlay1 } from "react-icons/ci";
 import { FaRegDotCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
+import { UserAuth } from "../context/AuthContext";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const ImageMain = () => {
   const [movies, setMovies] = useState([]);
   const movie = movies[Math.floor(Math.random() * movies.length)];
+  const { user } = UserAuth();
+
+  const movieID = doc(db, "users", `${user?.uid}`);
+
+  const handleError = () => {
+    MySwal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `Added ${movie.title} to favorite list`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   //get movies -> database
   useEffect(() => {
@@ -31,7 +55,25 @@ const ImageMain = () => {
     }
   };
 
-
+  const saveShow = async () => {
+    if (user?.uid) {
+      await updateDoc(movieID, {
+        savedShows: arrayUnion({
+          id: movie?.id,
+          title: movie?.title,
+          backdrop_path: movie?.backdrop_path,
+          language: movie?.language,
+          hours: movie?.hours,
+          overview: movie?.overview,
+          poster_path: movie?.poster_path,
+          genre: movie?.genre,
+          release_date: movie?.release_date,
+          like: true,
+        }),
+      });
+      handleError();
+    }
+  };
 
   let c = movie?.chat?.reduce((a, v) => (a = a + v.evaluate), 0);
   let d = c / movie?.chat?.length;
@@ -85,7 +127,10 @@ const ImageMain = () => {
             </Link>
           )}
 
-          <button className=" text-white bg-slate-500/90 rounded-3xl py-2 px-5 ml-5 flex space-x-2">
+          <button
+            onClick={() => saveShow()}
+            className=" text-white bg-slate-500/90 rounded-3xl py-2 px-5 ml-5 flex space-x-2"
+          >
             <p>
               <FaRegDotCircle className="mt-1" />
             </p>

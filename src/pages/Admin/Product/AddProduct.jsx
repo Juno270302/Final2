@@ -15,6 +15,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import withReactContent from "sweetalert2-react-content";
 
 const AddProduct = () => {
   const [file1, setFile1] = useState("");
@@ -38,6 +39,7 @@ const AddProduct = () => {
   const [genre, setGenre] = useState([]);
 
   const navigate = useNavigate();
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     onSnapshot(collection(db, "genres"), (snapShot) => {
@@ -48,6 +50,14 @@ const AddProduct = () => {
       setGenre(list);
     });
   }, []);
+  
+  const handleError = () => {
+    MySwal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  };
 
   useEffect(() => {
     const uploadFile1 = () => {
@@ -158,40 +168,56 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      Swal.fire({
-        title: `Add ${title} movie`,
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Accept",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const docRef = await addDoc(collection(db, "movies"), {
-            title: title,
-            genre: arrayUnion(category),
-            hours: hours,
-            limit: limitAge ?? "None",
-            release_date: date,
-            language: language,
-            overview: discription,
-            backdrop_path: file2Save,
-            poster_path: file1Save,
-            license: vipMember ?? "None",
-            video: {
-              titlevideo: video.name,
-              video: videoSave,
-            },
-          });
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `Add ${title} movie success`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
-        }
-      });
+      if (
+        title != "" &&
+        category != "" &&
+        hours != "" &&
+        limitAge != "" &&
+        date != "" &&
+        language != "" &&
+        discription != "" &&
+        file2Save != "" &&
+        file1Save != "" &&
+        vipMember != "" &&
+        video != ""
+      ) {
+        Swal.fire({
+          title: `Add ${title} movie`,
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Accept",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const docRef = await addDoc(collection(db, "movies"), {
+              title: title,
+              genre: arrayUnion(category),
+              hours: hours,
+              limit: limitAge ?? "None",
+              release_date: date,
+              language: language,
+              overview: discription,
+              backdrop_path: file2Save,
+              poster_path: file1Save,
+              license: vipMember ?? "None",
+              video: {
+                titlevideo: video.name,
+                video: videoSave,
+              },
+            });
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `Add ${title} movie success`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/admin");
+          }
+        });
+      } else {
+        handleError();
+      }
     } catch (error) {
       console.log(error);
     }

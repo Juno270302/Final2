@@ -18,6 +18,7 @@ import { UserAuth } from "../context/AuthContext";
 import { db } from "../firebase";
 import ShowCast from "../components/ShowCast";
 import Review from "../components/Review";
+import RecommentMovie from "../components/RecommentMovie";
 
 const Detail = () => {
   const use = useLocation();

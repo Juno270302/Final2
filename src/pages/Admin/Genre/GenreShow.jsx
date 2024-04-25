@@ -43,21 +43,21 @@ const GenreShow = () => {
         <div className="max-w-[1200px] w-full h-full mx-auto bg-[#553E58] rounded-3xl text-white ">
           <div className="w-full h-full p-7 ">
             <div className="flex w-full  items-center justify-between py-5">
-              <div className="">
+              <div className="w-full">
                 <input
-                  className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
+                  className="py-1 px-5 rounded-xl w-[152px] text-black  mt-2"
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search Contacts"
                 />
               </div>
-              <div className="w-full  ">
-                <h1 className="font-bold text-4xl text-white  float-right  ">
+              <div className="w-full text-center ">
+                <h1 className="font-bold text-4xl text-white ">
                   Genre Management
                 </h1>
               </div>
-              <div className="w-full ">
+              <div className="w-full text-right">
                 <Link to={`/admin/addgenre`}>
-                  <button className="font-bold text-[#F20000] float-right bg-[#E0D5D5] rounded-2xl px-6 py-2">
+                  <button className="font-bold text-[#F20000] text-right bg-[#E0D5D5] rounded-2xl px-6 py-2">
                     Add
                   </button>
                 </Link>

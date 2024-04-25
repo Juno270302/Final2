@@ -6,7 +6,7 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
-
+import withReactContent from "sweetalert2-react-content";
 import "react-datepicker/dist/react-datepicker.css";
 
 const AddAuthor = () => {
@@ -23,6 +23,15 @@ const AddAuthor = () => {
   const [roleAuthor, setRoleAuthor] = useState([]);
 
   const navigate = useNavigate();
+
+  const MySwal = withReactContent(Swal);
+  const handleError = () => {
+    MySwal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+  };
 
   useEffect(() => {
     const uploadFile = () => {
@@ -72,33 +81,45 @@ const AddAuthor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      Swal.fire({
-        title: `Add ${name}`,
-        icon: "success",
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Accept",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const docRef = await addDoc(collection(db, "authors"), {
-            name_cast: name,
-            gender: gender,
-            birthday: birthday,
-            pob: pob,
-            img_cast: fileSave,
-            biography: discription,
-            role: role,
-          });
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `Add ${name} success`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/admin/authorshow");
-        }
-      });
+      if (
+        name != "" &&
+        gender != "" &&
+        birthday != "" &&
+        pob != "" &&
+        fileSave != "" &&
+        discription != "" &&
+        role != ""
+      ) {
+        Swal.fire({
+          title: `Add ${name}`,
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Accept",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const docRef = await addDoc(collection(db, "authors"), {
+              name_cast: name,
+              gender: gender,
+              birthday: birthday,
+              pob: pob,
+              img_cast: fileSave,
+              biography: discription,
+              role: role,
+            });
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `Add ${name} success`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/admin/authorshow");
+          }
+        });
+      } else {
+        handleError();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -162,7 +183,7 @@ const AddAuthor = () => {
 
                   <div className="flex justify-between py-3 text-black">
                     <div className="flex flex-col w-full ">
-                      <label className="text-gray-400 ">Movie Category</label>
+                      <label className="text-gray-400 ">Role</label>
                       <select
                         onChange={(e) => setRole(e.target.value)}
                         className="py-3 rounded border text-white border-gray-300 bg-[#2E2439]"
@@ -218,7 +239,7 @@ const AddAuthor = () => {
                     type="submit"
                     className="w-full border py-3 mt-[30px] font-body bg-[#E0D5D5] text-[#f20000] border-white/70  rounded"
                   >
-                    Pusblish Movie
+                    Pusblish Author
                   </button>
                 </div>
               </form>

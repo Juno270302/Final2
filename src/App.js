@@ -31,7 +31,6 @@ import ViewMoreAuthor from "./pages/ViewMoreAuthor";
 import CRMovie from "./pages/CRMovie";
 import Category from "./pages/Category";
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
-import ChooseCategory from "./pages/ChooseCategory";
 
 function App() {
   return (
@@ -182,14 +181,7 @@ function App() {
               </RoleUser>
             }
           />
-          <Route
-            path="chooseCategory"
-            element={
-              <RoleUser>
-                <ChooseCategory />
-              </RoleUser>
-            }
-          />
+
           <Route path="authors">
             <Route
               index
