@@ -22,12 +22,18 @@ const CheckoutForm = ({ data }) => {
   const today = new Date();
   const priorDate = new Date(new Date().setDate(today.getDate() + 30));
 
-
-
   const handleSuccess = () => {
     MySwal.fire({
       icon: "success",
       title: "Payment Success 🎉",
+      timer: 4000,
+    });
+  };
+
+  const handleError = () => {
+    MySwal.fire({
+      icon: "error",
+      title: "Payment error - Your card was corrupted, please try again",
       timer: 4000,
     });
   };
@@ -53,7 +59,7 @@ const CheckoutForm = ({ data }) => {
     console.log(error);
 
     if (error) {
-      setMessage(error.message);
+      handleError();
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       handleSuccess();
       const update = doc(db, "users", data?.id);
@@ -76,7 +82,7 @@ const CheckoutForm = ({ data }) => {
   };
 
   return (
-    <div className="px-52">
+    <div className="px-52 sm:px-0 lg:px-10">
       <form
         className="border py-10 px-10 rounded-xl bg-[#E0D5D5] space-y-5"
         onSubmit={handleSubmit}

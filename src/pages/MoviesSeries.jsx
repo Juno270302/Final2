@@ -23,7 +23,6 @@ const MoviesSeries = () => {
       setMovies(list);
     });
   }, []);
-
   //get genres -> database
   useEffect(() => {
     onSnapshot(collection(db, "genres"), (snapShot) => {
@@ -77,7 +76,7 @@ const MoviesSeries = () => {
           </div>
         </div>
 
-        <div className="w-full grid grid-cols-4 gap-4 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 justify-center">
+        <div className="w-full grid grid-cols-4 gap-4 2xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-2 justify-center">
           {movies
             .filter((e) => e.license?.includes("None"))
             .filter((e) =>

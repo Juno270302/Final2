@@ -11,6 +11,7 @@ const CheckOut = () => {
 
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
+  console.log(stripePromise);
 
   useEffect(() => {
     fetch("/config").then(async (r) => {
@@ -32,8 +33,8 @@ const CheckOut = () => {
   return (
     <div className="py-52">
       {clientSecret && stripePromise && (
-        <Elements stripe={stripePromise} options={{ clientSecret }} >
-          <CheckoutForm data = {data}/>
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <CheckoutForm data={data} />
         </Elements>
       )}
     </div>

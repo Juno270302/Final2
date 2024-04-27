@@ -47,7 +47,7 @@ const GenreShow = () => {
                 <input
                   className="py-1 px-5 rounded-xl w-[152px] text-black  mt-2"
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search Contacts"
+                  placeholder="Search Name"
                 />
               </div>
               <div className="w-full text-center ">

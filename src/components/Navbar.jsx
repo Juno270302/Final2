@@ -60,7 +60,7 @@ const Navbar = () => {
   return (
     <div className="">
       {menu === true ? (
-        <div className="flex items-center z-[100] absolute text-white w-full py-4 justify-between font-main">
+        <div className="flex items-center z-10 absolute text-white w-full py-4 justify-between font-main">
           <Link to="/">
             <div className="flex items-center">
               <img className=" w-14 ml-3" src={icon} />

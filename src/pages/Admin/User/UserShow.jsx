@@ -4,17 +4,28 @@ import { collection, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { FaXmark } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const UserShow = () => {
   const [data, setData] = useState();
   const [test, setTest] = useState([]);
   const [search, setSearch] = useState("");
+  const [value, setValue] = useState(null);
+
+  const MySwal = withReactContent(Swal);
+  const handleAccept = () => {
+    MySwal.fire({
+      icon: "question",
+      title: "Bạn có muốn block tài khoản này không",
+      text: "Something went wrong!",
+    });
+  };
 
   const today = new Date();
   const priorDate = new Date(new Date().setDate(today.getDate() + 30));
   const cancelDate = new Date(new Date().setDate(today.getDate() - 1));
 
-  console.log(data);
   useEffect(() => {
     onSnapshot(collection(db, "users"), (snapShot) => {
       let list = [];
@@ -44,6 +55,42 @@ const UserShow = () => {
     });
   };
 
+  const handleSelect = (e) => {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
+
+  const handleBlock = async (ID) => {
+    Swal.fire({
+      title: `Bạn có muốn block tài khoản này chứ?`,
+      icon: "error",
+      confirmButtonColor: "#F20000",
+      confirmButtonText: "Block",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const update = doc(db, "users", ID);
+        await updateDoc(update, {
+          block: true,
+        });
+      }
+    });
+  };
+  const handleUnBlock = async (ID) => {
+    Swal.fire({
+      title: `Bạn có muốn ân xá cho tài khoản này?`,
+      icon: "success",
+      confirmButtonColor: "#22C55E",
+      confirmButtonText: "Unblock",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const update = doc(db, "users", ID);
+        await updateDoc(update, {
+          block: false,
+        });
+      }
+    });
+  };
+
   return (
     <div className="w-full h-full bg-[#212140]">
       <div className="w-full px-10 py-40 flex flex-row ">
@@ -56,12 +103,24 @@ const UserShow = () => {
                   User Management
                 </h1>
               </div>
-              <div className="w-[35%] ">
-                <input
-                  className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search Contacts"
-                />
+              <div className="w-[35%] flex items-center justify-end">
+                <div>
+                  <select
+                    onChange={(e) => handleSelect(e)}
+                    class=" py-1 mt-2 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
+                  >
+                    <option>All</option>
+                    <option>Vip</option>
+                    <option>None</option>
+                  </select>
+                </div>
+                <div>
+                  <input
+                    className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Email"
+                  />
+                </div>
               </div>
             </div>
 
@@ -72,7 +131,7 @@ const UserShow = () => {
                     <th className=" w-[10%] ">Image</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Address</th>
+                    <th>Block</th>
                     <th>Vip</th>
                     <th>date</th>
                     <th>Extend</th>
@@ -83,7 +142,16 @@ const UserShow = () => {
                   ?.filter((item) => {
                     return search?.toLowerCase() === ""
                       ? item
-                      : item.username?.toLowerCase().includes(search);
+                      : item.email?.toLowerCase().includes(search);
+                  })
+                  ?.filter((e) => {
+                    if (value === "All" || value === null) {
+                      return e;
+                    } else if (value === "Vip") {
+                      return e.member.includes("VIP");
+                    } else {
+                      return e.member.includes("Member");
+                    }
                   })
                   ?.map((item) => {
                     const expirationDate = new Date(
@@ -93,7 +161,6 @@ const UserShow = () => {
                     const year = expirationDate.getFullYear();
                     const date = expirationDate.getDate();
                     const currentDate = date + "/" + month + "/" + year;
-                    console.log(currentDate);
 
                     return (
                       <tbody key={item.id}>
@@ -109,7 +176,23 @@ const UserShow = () => {
                             {item?.username}
                           </td>
                           <td className=" text-center">{item?.email}</td>
-                          <td className=" text-center">{item?.address}</td>
+                          <td className=" text-center">
+                            {item?.block === true ? (
+                              <button
+                                onClick={() => handleUnBlock(item.id)}
+                                className="bg-green-500  text-white font-bold py-2 px-4 rounded"
+                              >
+                                Unblock
+                              </button>
+                            ) : (
+                              <button
+                                className="bg-red-500  text-white font-bold py-2 px-4 rounded"
+                                onClick={() => handleBlock(item.id)}
+                              >
+                                Block
+                              </button>
+                            )}
+                          </td>
                           <td className="w-full text-center">
                             {item?.member === "VIP" ? (
                               <div className=" flex justify-center text-2xl text-green-500">
@@ -125,15 +208,15 @@ const UserShow = () => {
                           <td className="text-center ">{currentDate}</td>
                           <td className="text-center ">
                             <button
-                              className="bg-gray-700 px-2 py-1 rounded-2xl"
+                              className="bg-green-500  text-white font-bold py-2 px-4 rounded"
                               onClick={() => handleSubmit(item.id)}
                             >
-                              Up Vip
+                              Vip 1 Month
                             </button>
                           </td>
                           <td className="text-center ">
                             <button
-                              className="bg-gray-700 px-2 py-1 rounded-2xl"
+                              className="bg-red-500  text-white font-bold py-2 px-4 rounded"
                               onClick={() => handleCancel(item.id)}
                             >
                               Cancel Vip

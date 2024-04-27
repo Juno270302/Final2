@@ -14,7 +14,20 @@ import Swal from "sweetalert2";
 const AdminPage = () => {
   const [data, setData] = useState([]);
   const [search, setSearch] = useState("");
-  console.log(data);
+  const [genre, setGenre] = useState([]);
+  const [value, setValue] = useState(null);
+
+  //get genres -> database
+  useEffect(() => {
+    onSnapshot(collection(db, "genres"), (snapShot) => {
+      let list = [];
+      snapShot.docs.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() });
+      });
+      setGenre(list);
+    });
+  }, [data?.id]);
+
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "movies"), (snapShot) => {
       let list = [];
@@ -41,6 +54,11 @@ const AdminPage = () => {
       }
     });
   };
+  const handleSelect = (e) => {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
+
   return (
     <div className="w-full h-full bg-[#212140]">
       <div className="w-full px-10 py-40 flex flex-row ">
@@ -48,12 +66,25 @@ const AdminPage = () => {
         <div className="max-w-[1200px] h-full mx-auto bg-[#553E58] rounded-3xl text-white ">
           <div className="w-full h-full p-7 ">
             <div className="flex w-full items-center justify-between py-5">
-              <div className="">
-                <input
-                  className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search"
-                />
+              <div className="flex items-center">
+                <div>
+                  <select
+                    onChange={(e) => handleSelect(e)}
+                    class=" py-1 mt-2 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
+                  >
+                    <option>All</option>
+                    {genre.map((option) => (
+                      <option value={option.key}>{option.key}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="">
+                  <input
+                    className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search Movie"
+                  />
+                </div>
               </div>
               <div className=" w-full">
                 <h1 className="font-bold text-4xl text-white text-center  float-right  ">
@@ -85,6 +116,13 @@ const AdminPage = () => {
                     return search?.toLowerCase() === ""
                       ? item
                       : item.title?.toLowerCase().includes(search);
+                  })
+                  ?.filter((e) => {
+                    if (value === "All" || value === null) {
+                      return e;
+                    } else {
+                      return e.genre.includes(value);
+                    }
                   })
                   ?.map((item) => {
                     const timestamp = item?.release_date.seconds; // This would be the timestamp you want to format

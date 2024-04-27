@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Role } from "../components/Role";
 import AdminPage from "./Admin/Product/AdminPage";
 import UsersPage from "./UsersPage";
-import { UserAuth } from "../context/AuthContext";
 import Dashboard from "./Admin/Dashboard/Dashboard";
 
 const Home = () => {
   const userInfo = Role(); //check role
   const [users, setUsers] = useState({});
+  console.log(users);
 
   useEffect(() => {
     setUsers(userInfo);

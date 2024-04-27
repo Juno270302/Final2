@@ -5,7 +5,7 @@ const ShowMovie = ({ item, index }) => {
   return (
     <button
       key={index}
-      className="w-[340px] inline-block cursor-pointer relative p-2 hover:translate-y-2 hover:translate-x-2 hover:z-0 "
+      className="w-[340px] inline-block cursor-pointer relative p-2 hover:translate-y-2 hover:translate-x-2 hover:z-0 sm:w-[250px] "
     >
       <Link to={`/detail/${item.id}`} state={{ from: item }}>
         <img
