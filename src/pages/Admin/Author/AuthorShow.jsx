@@ -66,23 +66,23 @@ const AuthorShow = () => {
           <div className="w-full h-full p-7 ">
             <div className="flex w-full  items-center justify-between py-5">
               <div className="flex items-center">
-                <div>
-                  <select
-                    onChange={(e) => handleSelect(e)}
-                    class=" py-1 mt-2 bg-gray-700 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
-                  >
-                    <option>All</option>
-                    {roleAuthor.map((option) => (
-                      <option value={option.key}>{option.key}</option>
-                    ))}
-                  </select>
-                </div>
                 <div className="">
                   <input
                     className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search Name"
                   />
+                </div>
+                <div>
+                  <select
+                    onChange={(e) => handleSelect(e)}
+                    class=" py-1 mt-2 bg-gray-700 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lg:w-[200px]"
+                  >
+                    <option>All</option>
+                    {roleAuthor.map((option) => (
+                      <option value={option.key}>{option.key}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="w-full ">

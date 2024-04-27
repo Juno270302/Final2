@@ -5,21 +5,38 @@ import { auth, db } from "../firebase";
 import { UserAuth } from "../context/AuthContext";
 import { updatePassword } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const ChangePassword = () => {
   const { user } = UserAuth();
   const [users, setUsers] = useState();
-  console.log(users);
 
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
   const [confirmPasword, setConfirmPassword] = useState();
 
-  console.log(
-    oldPassword === users?.password &&
-      newPassword === confirmPasword &&
-      newPassword?.length > 1
-  );
+  const MySwal = withReactContent(Swal);
+  const handleError = () => {
+    MySwal.fire({
+      icon: "Error",
+      title: "Oops...",
+      text: "Hãy Thử nhập lại",
+    });
+  };
+
+  const handleSuccess = () => {
+    MySwal.fire({
+      icon: "success",
+      title: "Change Password Success",
+    });
+  };
+
+  // console.log(
+  //   oldPassword === users?.password &&
+  //     newPassword === confirmPasword &&
+  //     newPassword?.length > 1
+  // );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,11 +77,13 @@ const ChangePassword = () => {
             }
           };
           a();
-          alert("Hello");
+          handleSuccess();
         })
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      handleError();
     }
   };
 

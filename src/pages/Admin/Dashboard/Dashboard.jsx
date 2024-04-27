@@ -92,7 +92,7 @@ const Dashboard = () => {
               <input
                 className="py-1 px-5 rounded-xl w-[152px] text-black flex float-right mt-2"
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Contacts"
+                placeholder="Search Email"
               />
             </div>
             <div className=" w-full h-[500px] overflow-y-scroll whitespace-nowrap scrollbar-hide scroll-smooth">
