@@ -5,6 +5,7 @@ import { IoArrowBack } from "react-icons/io5";
 const ViewMoreAuthor = () => {
   const use = useLocation();
   const movies = use.state; // data send from ...
+  console.log(movies);
 
   return (
     <div>
@@ -18,11 +19,15 @@ const ViewMoreAuthor = () => {
                   {movies.title}
                 </div>
                 <div>
-                  <Link to={`/`} className="flex text-xl space-x-2">
+                  <Link
+                    to={`/detail/${movies?.id}`}
+                    state={{ from: movies }}
+                    className="flex text-xl space-x-2"
+                  >
                     <span className="mt-1">
                       <IoArrowBack />
                     </span>
-                    <span>Back To main</span>
+                    <span>Back to main</span>
                   </Link>
                 </div>
               </div>

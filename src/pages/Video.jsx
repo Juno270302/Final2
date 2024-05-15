@@ -27,7 +27,7 @@ const Video = () => {
   return (
     <div className="w-full h-screen bg-[#212140] ">
       {age ? (
-        <div className="px-52 py-16 w-full h-full ">
+        <div className="px-52 py-16 w-full h-full sm:px-0 lg:px-10 xl:px-10 2xl:px-10">
           <div className=" w-full h-full mt-5">
             <Link to={`/detail/${movie?.id}`} state={{ from: movie }}>
               <div className="py-5 pl-10 text-3xl text-white flex items-center space-x-2">
@@ -37,13 +37,15 @@ const Video = () => {
             </Link>
 
             <div>
-              <div className="w-[1250px] h-[500px] mx-auto mt-10">
-                <ReactPlayer
-                  width={1250}
-                  height={600}
-                  controls
-                  url={movie?.video?.video}
-                />
+              <div className="w-[1250px] h-[500px] mx-auto mt-10 ">
+                <div className="w-[1200px] h-[500px] sm:w-[500px] lg:w-[700px] xl:w-[1000px] ">
+                  <ReactPlayer
+                    width="100%"
+                    height="100%"
+                    controls
+                    url={movie?.video?.video}
+                  />
+                </div>
               </div>
             </div>
           </div>

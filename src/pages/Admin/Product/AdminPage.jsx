@@ -115,7 +115,9 @@ const AdminPage = () => {
                   ?.filter((item) => {
                     return search?.toLowerCase() === ""
                       ? item
-                      : item.title?.toLowerCase().includes(search);
+                      : item.title
+                          ?.toLowerCase()
+                          .includes(search);
                   })
                   ?.filter((e) => {
                     if (value === "All" || value === null) {

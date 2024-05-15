@@ -44,6 +44,7 @@ const Movie = () => {
           {movies
             .filter((e) => e.license?.includes("None"))
             .slice(0, 10)
+            .sort(() => Math.random() - 0.5) // Sắp xếp ngẫu nhiên
             .map((item) => (
               <ShowMovie item={item} key={item.id} />
             ))}

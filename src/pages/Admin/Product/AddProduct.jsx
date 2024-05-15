@@ -50,7 +50,7 @@ const AddProduct = () => {
       setGenre(list);
     });
   }, []);
-  
+
   const handleError = () => {
     MySwal.fire({
       icon: "error",
@@ -286,7 +286,7 @@ const AddProduct = () => {
                       </select>
                     </div>
                     <div className="flex flex-col w-[40%] ">
-                      <label className="text-gray-400 ">Limit Age</label>
+                      <label className="text-gray-400 ">Account</label>
                       <select
                         onChange={(e) => setVipMember(e.target.value)}
                         className="py-3 rounded border text-white border-gray-300 bg-[#2E2439]"

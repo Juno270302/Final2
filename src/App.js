@@ -38,14 +38,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/">
-          <Route
-            index
-            element={
-              <RoleUser>
-                <Home />
-              </RoleUser>
-            }
-          />
+          <Route index element={<Home />} />
           <Route path="signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
           <Route path="account">
@@ -82,6 +75,7 @@ function App() {
               }
             />
           </Route>
+          
           <Route path="admin">
             <Route
               index

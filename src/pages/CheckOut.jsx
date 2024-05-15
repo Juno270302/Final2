@@ -11,7 +11,8 @@ const CheckOut = () => {
 
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
-  console.log(stripePromise);
+  console.log(stripePromise)
+  console.log(clientSecret)
 
   useEffect(() => {
     fetch("/config").then(async (r) => {

@@ -76,6 +76,8 @@ const ImageMain = () => {
   };
 
   let c = movie?.chat?.reduce((a, v) => (a = a + v.evaluate), 0);
+  let fractionalPart = (c - Math.floor(c)).toFixed(2);
+  console.log(fractionalPart);
   let d = c / movie?.chat?.length;
 
   const timestamp = movie?.release_date.seconds; // This would be the timestamp you want to format

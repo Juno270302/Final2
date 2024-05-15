@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [movie, setMovie] = useState([]);
   const [author, setAuthor] = useState([]);
   const [search, setSearch] = useState("");
-  console.log(movie);
 
   useEffect(() => {
     onSnapshot(collection(db, "payments"), (snapShot) => {
@@ -43,10 +42,9 @@ const Dashboard = () => {
     });
   }, []);
 
-  const movies = payment.filter((item) => item.money === 10);
-  const moviesCount = movies.length;
+  const money = payment.filter((item) => item.money === 10);
+  const moneyCount = money.length;
 
-  console.log(payment);
   return (
     <div className="w-full h-full bg-[#212140]">
       <div className="w-full px-10 py-40 flex flex-row ">
@@ -65,7 +63,7 @@ const Dashboard = () => {
                 </div>
                 <div className="text-xl font-main">
                   <div>Total Amount</div>
-                  <div>{moviesCount * 10} USD</div>
+                  <div>{moneyCount * 10} USD</div>
                 </div>
               </div>
               <div className=" w-full h-[80px] flex space-x-5 items-center bg-[#212140] rounded-xl">
@@ -124,6 +122,7 @@ const Dashboard = () => {
                       minute: "2-digit",
                       second: "2-digit",
                     }).format(timestamp * 1000);
+
                     return (
                       <tbody key={item.id}>
                         <tr className="h-[100px] border">
