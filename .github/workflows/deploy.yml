@@ -1,0 +1,33 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Thay thế bằng tên branch bạn muốn theo dõi
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Cài đặt Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cài đặt phụ thuộc
+        run: npm install
+
+      - name: Build ứng dụng
+        run: npm run build
+
+      - name: Đẩy build lên branch 'build'
+        uses: s0/git-publish-subdir-action@develop
+        with:
+          folder: build
+          branch: build
+          repo: self
+          github_token: ${{ secrets.GITHUB_TOKEN }}
